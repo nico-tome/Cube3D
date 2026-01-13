@@ -1,78 +1,59 @@
-NAME := cube3D
+NAME		:= 	cube3D
 
-ESC := \033
-RESET := $(ESC)[0m
-TEXT_CYAN := $(ESC)[38;5;51m
-TEXT_BLUE := $(ESC)[38;5;39m
-TEXT_DARK_BLUE := $(ESC)[38;5;21m
-TEXT_PURPLE := $(ESC)[38;5;93m
-TEXT_NEON_GREEN := $(ESC)[38;5;46m
-TEXT_NEON_RED := $(ESC)[38;5;196m
-BG_RESET := $(RESET)
-BG_FRA_BLUE := $(ESC)[48;5;19m
-BG_FRA_WHITE := $(ESC)[48;5;255m
-BG_FRA_RED := $(ESC)[48;5;160m
-BG_BRA_GREEN := $(ESC)[48;5;28m
-BG_BRA_YELLOW := $(ESC)[48;5;220m
-BG_BRA_BLUE := $(ESC)[48;5;21m
-BG_ESP_RED := $(ESC)[48;5;160m
-BG_ESP_YELLOW := $(ESC)[48;5;220m
-YELLOW=\033[0;33m
+SRCS		:= 	main.c \
 
-SRC_DIR := src/
-BUILD_DIR := build/
-LIBFT = ./src/libft/libft.a
-LIBFT_DIR = src/libft
+DIR		:=	src/
+BUILD_DIR	:=	build/
 
-SRCS := $(SRC_DIR)main.c \
+OBJS		:=	$(patsubst %.c, $(BUILD_DIR)%.o, $(SRCS))
 
+CC			:= cc
 
-OBJ := $(patsubst $(SRC_DIR)%.c, $(BUILD_DIR)%.o, $(SRCS))
+FLAGS 		:= -Wall -Werror -Wextra -I ./includes
 
-HEADERS := includes/
+TPUT 					= tput -T xterm-256color
+_RESET 					:= $(shell $(TPUT) sgr0)
+_BOLD 					:= $(shell $(TPUT) bold)
+_ITALIC 				:= $(shell $(TPUT) sitm)
+_UNDER 					:= $(shell $(TPUT) smul)
+_GREEN 					:= $(shell $(TPUT) setaf 2)
+_YELLOW 				:= $(shell $(TPUT) setaf 3)
+_RED 					:= $(shell $(TPUT) setaf 1)
+_GRAY 					:= $(shell $(TPUT) setaf 8)
+_PURPLE 				:= $(shell $(TPUT) setaf 5)
 
-CC := cc
+OBJS_TOTAL	= $(words $(OBJS))
+N_OBJS		:= $(shell find $(DIR) -type f -name $(OBJS) 2>/dev/null | wc -l)
+OBJS_TOTAL	:= $(shell echo $$(( $(OBJS_TOTAL) - $(N_OBJS) )))
+CURR_OBJ	= 0
 
-FLAGS := -Wall -Werror -Wextra -g
+all: ${NAME}
 
-all: header ${NAME}
+${LIBS}:
+	@make -C lib/libft
+	@make -C lib/MacroLibX -j16
 
-header:
-	@echo ""
-	@printf " $(TEXT_CYAN)%s$(RESET)\n" ' ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     '
-	@printf " $(TEXT_CYAN)%s$(RESET)\n" ' ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     '
-	@printf " $(TEXT_BLUE)%s$(RESET)\n" ' ██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     '
-	@printf " $(TEXT_BLUE)%s$(RESET)\n" ' ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     '
-	@printf " $(TEXT_DARK_BLUE)%s$(RESET)\n" ' ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗'
-	@printf " $(TEXT_DARK_BLUE)%s$(RESET)\n" ' ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝'
-	@echo ""
-	@echo ""
-	@printf "       $(BG_BRA_GREEN)    $(BG_BRA_YELLOW)  $(BG_BRA_GREEN)    $(BG_RESET)           $(BG_FRA_BLUE)    $(BG_FRA_WHITE)    $(BG_FRA_RED)    $(BG_RESET)           $(BG_ESP_RED)            $(RESET)\n"
-	@printf "       $(BG_BRA_GREEN)  $(BG_BRA_YELLOW)  $(BG_BRA_BLUE)  $(BG_BRA_YELLOW)  $(BG_BRA_GREEN)  $(BG_RESET)           $(BG_FRA_BLUE)    $(BG_FRA_WHITE)    $(BG_FRA_RED)    $(BG_RESET)           $(BG_ESP_YELLOW)            $(RESET)\n"
-	@printf "       $(BG_BRA_GREEN)    $(BG_BRA_YELLOW)  $(BG_BRA_GREEN)    $(BG_RESET)           $(BG_FRA_BLUE)    $(BG_FRA_WHITE)    $(BG_FRA_RED)    $(BG_RESET)           $(BG_ESP_RED)            $(RESET)\n"
-	@echo ""
+${NAME}: ${LIBS} ${OBJS}
+	@${CC} ${FLAGS} -o ${NAME} ${OBJS} ${LIBS} -lm -lSDL2
+	@printf "$(_BOLD)$(NAME)$(_RESET) compiled $(_GREEN)$(_BOLD)successfully$(_RESET)\n\n"
 
-$(NAME): $(LIBFT) ${OBJ}
-	@echo "$(TEXT_NEON_GREEN)✅ Compilation of cube3D finished !$(RESET)"
-	@${CC} -o ${NAME} -I ${HEADERS} ${OBJ} ${LIBFT} ${FLAGS} -lreadline
-
-${BUILD_DIR}%.o: ${SRC_DIR}%.c
-	@mkdir -p $(dir $@)
-	@${CC} -o $@ -I ${HEADERS} -c $< ${FLAGS}
-
-$(LIBFT):
-	@make --no-print-directory -C $(LIBFT_DIR)
-	@echo "$(TEXT_NEON_GREEN)✅ Compilation of libft finished !$(RESET)"
-
+${BUILD_DIR}%.o: ${DIR}%.c
+	@mkdir -p ${BUILD_DIR}$(dir $@)
+	@${CC} ${FLAGS} -o $@ -c $< $(FLAGS)
+	@$(eval CURR_OBJ=$(shell echo $$(( $(CURR_OBJ) + 1 ))))
+	@$(eval PERCENT=$(shell echo $$(( $(CURR_OBJ) * 100 / $(OBJS_TOTAL) ))))
+	@printf "$(_GREEN)($(_BOLD)%3s%%$(_RESET)$(_GREEN)) $(_RESET)Compiling $(_BOLD)$(_PURPLE)$<$(_RESET)\n" "$(PERCENT)"
+	
 clean:
-	@echo "$(YELLOW)🧹 file .o cleaned successfully $(RESET)"
-	@make --no-print-directory -C $(LIBFT_DIR) clean
-	@rm -f ${OBJ}
+	@rm -rf ${OBJS}
+	@make -C lib/MacroLibX clean
+	@make -C lib/libft clean
+	@printf "\n$(_BOLD)All objects are $(_GREEN)cleaned $(_RESET)! 🎉\n\n"
 
 fclean: clean
-	@echo "$(TEXT_NEON_RED)🧨 cube3D deleted$(RESET)"
-	@make --no-print-directory -C $(LIBFT_DIR) fclean
 	@rm -f ${NAME}
+	@rm -f ${LIBS}
+	@printf "Cleaned $(_BOLD)$(NAME)$(_RESET) !\n\n"
 
 re: fclean all
 
