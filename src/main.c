@@ -6,11 +6,11 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:19:31 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/12 15:28:29 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/15 18:51:38 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "../cube3d.h"
 
 int	main(int ac, char **av)
 {
@@ -26,5 +26,4 @@ int	main(int ac, char **av)
 		printf("PARSING ERROR !\n");
 		exit(EXIT_FAILURE);
 	}
-
 }

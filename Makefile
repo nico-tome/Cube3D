@@ -1,11 +1,16 @@
 NAME		:= 	cube3D
 
-SRCS		:= 	main.cpp \
 
 DIR		:=	srcs/
+VEC2	:=	vec2/
+
 BUILD_DIR	:=	build/
 
-OBJS		:=	$(patsubst %.cpp, $(BUILD_DIR)%.o, $(SRCS))
+SRCS		:= 	${DIR}main.c \
+				${DIR}${VEC2}vec2_utils1.c \
+				${DIR}${VEC2}vec2_utils2.c \
+
+OBJS		:=	$(patsubst ${DIR}%.c, $(BUILD_DIR)%.o, $(SRCS))
 
 CC			:= cc
 
@@ -37,7 +42,7 @@ ${NAME}: ${LIBS} ${OBJS}
 	@${CC} ${FLAGS} -o ${NAME} ${OBJS} ${LIBS} -lm -lSDL2
 	@printf "$(_BOLD)$(NAME)$(_RESET) compiled $(_GREEN)$(_BOLD)successfully$(_RESET)\n\n"
 
-${BUILD_DIR}%.o: ${DIR}%.cpp
+${BUILD_DIR}%.o: ${DIR}%.c
 	@mkdir -p ${BUILD_DIR}$(dir $@)
 	@${CC} ${FLAGS} -o $@ -c $< $(FLAGS)
 	@$(eval CURR_OBJ=$(shell echo $$(( $(CURR_OBJ) + 1 ))))
