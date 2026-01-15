@@ -1,6 +1,5 @@
 NAME		:= 	cube3D
 
-
 DIR		:=	srcs/
 VEC2	:=	vec2/
 
@@ -10,7 +9,8 @@ SRCS		:= 	${DIR}main.c \
 				${DIR}${VEC2}vec2_utils1.c \
 				${DIR}${VEC2}vec2_utils2.c \
 
-OBJS		:=	$(patsubst ${DIR}%.c, $(BUILD_DIR)%.o, $(SRCS))
+OBJS		:=	$(patsubst %.c, $(BUILD_DIR)%.o, $(SRCS))
+
 
 CC			:= cc
 
@@ -44,15 +44,15 @@ ${NAME}: ${LIBS} ${OBJS}
 
 ${BUILD_DIR}%.o: ${DIR}%.c
 	@mkdir -p ${BUILD_DIR}$(dir $@)
-	@${CC} ${FLAGS} -o $@ -c $< $(FLAGS)
+	@${CC} -o $@ -c $< $(FLAGS)
 	@$(eval CURR_OBJ=$(shell echo $$(( $(CURR_OBJ) + 1 ))))
 	@$(eval PERCENT=$(shell echo $$(( $(CURR_OBJ) * 100 / $(OBJS_TOTAL) ))))
 	@printf "$(_GREEN)($(_BOLD)%3s%%$(_RESET)$(_GREEN)) $(_RESET)Compiling $(_BOLD)$(_PURPLE)$<$(_RESET)\n" "$(PERCENT)"
 	
 clean:
 	@rm -rf ${OBJS}
-	@make -c lib/MacroLibX clean
-	@make -c lib/libft clean
+	@make -C lib/MacroLibX clean
+	@make -C lib/libft clean
 	@printf "\n$(_BOLD)All objects are $(_GREEN)cleaned $(_RESET)! 🎉\n\n"
 
 fclean: clean
