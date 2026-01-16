@@ -1,0 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/16 12:02:23 by ntome             #+#    #+#             */
+/*   Updated: 2026/01/16 20:02:06 by ntome            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parsing.h"
+
+void	set_parser_infos(t_parsing_infos *parsing_i)
+{
+	parsing_i->ea_path = NULL;
+	parsing_i->no_path = NULL;
+	parsing_i->so_path = NULL;
+	parsing_i->we_path = NULL;
+	parsing_i->ceiling_color = NULL;
+	parsing_i->floor_color = NULL;
+	parsing_i->raw_datas = NULL;
+	parsing_i->file_size = 0;
+	parsing_i->file_extension = NULL;
+	parsing_i->map.size = 0;
+	parsing_i->map.map = NULL;
+}
+
+void	load_datas(t_parsing_infos *parsing_i, char *path)
+{
+	parsing_i->file_extension = get_extension(path);
+	parsing_i->file_size = get_file_size(path);
+	parsing_i->fd = open(path, O_RDONLY);
+	parsing_i->raw_datas = load_file(parsing_i->fd, parsing_i->file_size);
+	try_read_datas(parsing_i);
+}
+
+int	parsing(t_game_infos *game_i, char *path)
+{
+	int				result;
+	t_parsing_infos	parsing_i;
+
+	set_parser_infos(&parsing_i);
+	load_datas(&parsing_i, path);
+	result = check_datas(game_i, parsing_i)
+	return (result);
+}

@@ -1,0 +1,70 @@
+[
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/main.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/main.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/main.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/vec2/vec2_utils1.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/vec2/vec2_utils1.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/vec2/vec2_utils1.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/vec2/vec2_utils2.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/vec2/vec2_utils2.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/vec2/vec2_utils2.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/parsing/parsing.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/parsing/parsing.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/parsing/parsing.c"
+ }
+]

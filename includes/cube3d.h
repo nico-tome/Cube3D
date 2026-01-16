@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:22:41 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/15 18:55:41 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/16 10:52:31 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@
 # include "../lib/MacroLibX/includes/mlx_extended.h"
 # include "../lib/libft/libft.h"
 # include "vector2.h"
+
+typedef struct	s_game_infos
+{
+	char		**map;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	mlx_color	floor;
+	mlx_color	ceiling;
+}				t_game_infos;
 
 typedef struct s_mlx
 {
