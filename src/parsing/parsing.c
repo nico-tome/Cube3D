@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:02:23 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/16 20:02:06 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/18 20:36:47 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int	parsing(t_game_infos *game_i, char *path)
 
 	set_parser_infos(&parsing_i);
 	load_datas(&parsing_i, path);
-	result = check_datas(game_i, parsing_i)
+	result = check_datas(parsing_i);
 	return (result);
 }

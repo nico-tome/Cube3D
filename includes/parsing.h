@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:57:54 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/16 20:02:26 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/17 16:50:22 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void	try_read_datas(t_parsing_infos *parsing_i);
 int		skip_ws(char *str);
 void	update_infos(t_parsing_infos *parsing_i, const char *key, char *line);
 void	load_map(t_parsing_infos *parsing_i, int line);
+int		check_datas(t_game_infos *game_i, t_parsing_infos *parsing_i);
 
 #endif
