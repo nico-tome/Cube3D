@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 18:09:33 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/16 19:58:49 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/22 13:54:52 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ char	*get_extension(char *path)
 
 	i = 0;
 	size = ft_strlen(path);
-	extension = malloc(sizeof(char) * 5);
-	if (!extension)
-	{
-		printf("Malloc error in parsing_getter.c at line 24.\n");
-		return (NULL);
-	}
 	while (path[i] && path[i] != '.')
 		i++;
 	if (!path[i])
@@ -85,26 +79,26 @@ char	**load_file(int fd, int file_size)
 
 const char	*get_key(char *line)
 {
-	const char	*keys[] = {"NO", "SO", "WE", "EA", "F", "C"};
+	const char	*keys[] = {"NO", "SO", "WE", "EA", "F", "C", ""};
 	t_vec2		reader;
 	int			start;
 
 	reader.x = 0;
 	start = skip_ws(line);
-	while (keys[reader.x])
+	while (keys[reader.x][0])
 	{
 		reader.y = 0;
 		while (keys[reader.x][reader.y])
 		{
 			if (keys[reader.x][reader.y] != line[start + reader.y])
-				break;
+				break ;
 			reader.y++;
 		}
 		if (!keys[reader.x][reader.y])
 			return (keys[reader.x]);
 		reader.x++;
 	}
-	return (NULL);
+	return (keys[reader.x]);
 }
 
 void	try_read_datas(t_parsing_infos *parsing_i)
@@ -115,6 +109,7 @@ void	try_read_datas(t_parsing_infos *parsing_i)
 
 	line = 0;
 	count = 6;
+	key = NULL;
 	while (parsing_i->raw_datas[line] && count > 0)
 	{
 		if (parsing_i->raw_datas[line][0] != '\n')

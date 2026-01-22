@@ -6,14 +6,14 @@
 /*   By: ntome <nicolas@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 20:33:47 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/18 19:46:29 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/22 14:05:51 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "texture.h"
 #include "cube3d.h"
 
-static void	free_list(char ***list)
+static void	free_list(char **list)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ int	is_correct_color(char *color)
 
 	is_correct = 1;
 	vec2.x = 0;
-	rgb = ft_split(color, ';');
+	rgb = ft_split(color, ',');
 	while (rgb[vec2.x])
 	{
 		vec2.y = 0;
@@ -46,7 +46,7 @@ int	is_correct_color(char *color)
 		}
 		vec2.x++;
 	}
-	free_list(&rgb);
+	free_list(rgb);
 	return (is_correct);
 }
 
@@ -60,11 +60,14 @@ mlx_color	get_color(char *str)
 	color.r = ft_atoi(rgb[0]);
 	color.g = ft_atoi(rgb[1]);
 	color.b = ft_atoi(rgb[2]);
-	free_list(&rgb);
+	free_list(rgb);
 	return (color);
 }
 
 void	new_texture(mlx_context mlx, t_texture *texture, char *path)
 {
-	texture->texture = mlx_new_image_from_file(mlx, path, &texture->texture_width, &texture->texture_height);
+	texture->texture = mlx_new_image_from_file(mlx,
+			path,
+			&texture->texture_width,
+			&texture->texture_height);
 }

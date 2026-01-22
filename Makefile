@@ -3,13 +3,20 @@ NAME := cube3D
 SRC_DIR := src/
 VEC2_DIR := vec2/
 PARSING_DIR	:= parsing/
+TEXTURE_DIR := textures/
 
 BUILD_DIR := build/
 
 SRCS := $(GAME_DIR)main.c \
+		$(PARSING_DIR)parsing.c \
+		$(PARSING_DIR)check_map.c \
+		$(PARSING_DIR)checker.c \
+		$(PARSING_DIR)parsing_free.c \
+		$(PARSING_DIR)parsing_getter.c \
+		$(PARSING_DIR)parsing_reader.c \
+		$(TEXTURE_DIR)texture.c \
 		$(VEC2_DIR)vec2_utils1.c \
 		$(VEC2_DIR)vec2_utils2.c \
-		$(PARSING_DIR)parsing.c \
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)%.o, $(SRCS))
 
@@ -30,7 +37,7 @@ ${LIBS}:
 	@make -C lib/MacroLibX -j16
 
 $(NAME): ${LIBS} ${OBJ}
-	${CC} -o ${NAME} -I ${HEADERS} ${OBJ} ${LIBS} ${FLAGS} -lm -lSDL2
+	${CC} -o ${NAME} -I ${HEADERS} ${OBJ} ${LIBS} ${FLAGS} -no-pie -lm -lSDL2
 
 ${BUILD_DIR}%.o: ${SRC_DIR}%.c
 	@mkdir -p $(dir $@)

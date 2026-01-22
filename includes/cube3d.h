@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:22:41 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/17 20:49:57 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/22 16:44:24 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@
 # include "../lib/libft/libft.h"
 # include "vector2.h"
 
+typedef struct	s_map
+{
+	int		size;
+	char	**map;
+}				t_map;
+
 typedef struct	s_game_infos
 {
 	char		**map;
@@ -34,11 +40,25 @@ typedef struct	s_game_infos
 	mlx_color	ceiling;
 }				t_game_infos;
 
+typedef struct	s_player
+{
+	t_dvec2	pos;
+	t_dvec2	rot;
+	int		vel;
+}				t_player;
+
 typedef struct s_mlx
 {
 	mlx_context		mlx;
 	mlx_window		win;
 	t_vec2			window_size;
+	t_game_infos	game_infos;
+	t_player		player;
+	t_map			map;
+	mlx_color		*floor;
+	mlx_color		*ceiling;
+	double			time;
+	double			old_time;
 }				t_mlx;
 
 #endif

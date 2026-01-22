@@ -6,13 +6,11 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 19:26:55 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/16 20:12:01 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/22 14:10:07 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
 #include "parsing.h"
-#include "vector2.h"
 
 int	skip_ws(char *str)
 {
@@ -32,12 +30,14 @@ char	*extract_value(char *str, const char *key)
 	i = skip_ws(str);
 	i += ft_strlen(key);
 	i += skip_ws(str + i);
-	value = ft_substr(str, i, ft_strlen(str) - i);
+	value = ft_substr(str, i, (ft_strlen(str) - 1) - i);
 	return (value);
 }
 
 void	update_infos(t_parsing_infos *parsing_i, const char *key, char *line)
 {
+	if (!key[0])
+		return ;
 	if (!ft_strncmp(key, "NO", 2))
 		parsing_i->no_path = extract_value(line, key);
 	else if (!ft_strncmp(key, "SO", 2))
@@ -55,6 +55,7 @@ void	update_infos(t_parsing_infos *parsing_i, const char *key, char *line)
 void	load_map(t_parsing_infos *parsing_i, int line)
 {
 	int	i;
+	int	line_len;
 
 	i = 0;
 	while (parsing_i->raw_datas[line + i])
@@ -71,7 +72,9 @@ void	load_map(t_parsing_infos *parsing_i, int line)
 	i = 0;
 	while (parsing_i->raw_datas[line + i])
 	{
-		parsing_i->map.map[i] = ft_strdup(parsing_i->raw_datas[line + i]);
+		line_len = ft_strlen(parsing_i->raw_datas[line + i]) - 1;
+		parsing_i->map.map[i] = ft_substr(parsing_i->raw_datas[line + i],
+				0, line_len);
 		i++;
 	}
 	parsing_i->map.map[i] = NULL;

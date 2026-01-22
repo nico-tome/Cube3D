@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:02:23 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/18 20:36:47 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/22 13:23:52 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,9 @@ void	load_datas(t_parsing_infos *parsing_i, char *path)
 	try_read_datas(parsing_i);
 }
 
-int	parsing(t_game_infos *game_i, char *path)
+void	parsing(t_parsing_infos *parsing_i, char *path)
 {
-	int				result;
-	t_parsing_infos	parsing_i;
-
-	set_parser_infos(&parsing_i);
-	load_datas(&parsing_i, path);
-	result = check_datas(parsing_i);
-	return (result);
+	set_parser_infos(parsing_i);
+	load_datas(parsing_i, path);
+	parsing_i->result = check_datas(parsing_i);
 }
