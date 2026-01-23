@@ -6,13 +6,14 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:57:54 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/23 13:12:21 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/23 15:11:32 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
+#include <fcntl.h>
 # include "vector2.h"
 # include "../lib/libft/libft.h"
 

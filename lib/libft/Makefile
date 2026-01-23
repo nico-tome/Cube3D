@@ -66,19 +66,19 @@ FLAGS = -Wall -Werror -Wextra
 all: ${NAME}
 
 $(NAME): ${OBJ}
-	${AR} ${NAME} ${OBJ}
+	@${AR} ${NAME} ${OBJ}
 
 .c.o:
-	${CC} -o $@ -c $< ${FLAGS}
+	@${CC} -o $@ -c $< ${FLAGS}
 
 clean:
-	rm -f ${OBJS}
+	@rm -f ${OBJS}
 
 bonus: ${OBJS}
-	${AR} ${NAME} ${OBJS}
+	@${AR} ${NAME} ${OBJS}
 
 fclean: clean
-	rm -f ${NAME}
+	@rm -f ${NAME}
 
 re: fclean all
 
