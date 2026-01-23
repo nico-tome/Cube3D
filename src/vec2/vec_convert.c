@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec2_utils2.c                                      :+:      :+:    :+:   */
+/*   vec_convert.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/15 16:42:38 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/23 14:47:30 by ntome            ###   ########.fr       */
+/*   Created: 2026/01/23 11:29:02 by ntome             #+#    #+#             */
+/*   Updated: 2026/01/23 14:46:57 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/vector2.h"
+#include "vector2.h"
 
-int	vec2_is_higher(t_vec2 v_1, t_vec2 v_2)
+t_vec2	dvec2_to_vec2(t_dvec2 dvec2)
 {
-	return (v_1.y > v_2.y);
+	t_vec2	vec;
+
+	vec.x = (int)dvec2.x;
+	vec.y = (int)dvec2.y;
+	return (vec);
 }
 
-int	vec2_is_lower(t_vec2 v_1, t_vec2 v_2)
+t_dvec2	vec2_to_dvec2(t_vec2 vec2)
 {
-	return (v_1.y < v_2.y);
-}
+	t_dvec2	vec;
 
-int	vec2_is_left(t_vec2 v_1, t_vec2 v_2)
-{
-	return (v_1.x < v_2.x);
-}
-
-int	vec2_is_right(t_vec2 v_1, t_vec2 v_2)
-{
-	return (v_1.x > v_2.x);
-}
-
-void	vec2_print(t_vec2 vec2)
-{
-	printf("Vec2: x: %d, y: %d, adress: %p\n", vec2.x, vec2.y, &vec2);
+	vec.x = (double)vec2.x;
+	vec.y = (double)vec2.y;
+	return (vec);
 }

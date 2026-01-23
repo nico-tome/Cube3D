@@ -4,19 +4,28 @@ SRC_DIR := src/
 VEC2_DIR := vec2/
 PARSING_DIR	:= parsing/
 TEXTURE_DIR := textures/
+GAME_DIR	:= game/
+EVENT_DIR	:= event/
 
 BUILD_DIR := build/
 
-SRCS := $(GAME_DIR)main.c \
-		$(PARSING_DIR)parsing.c \
+SRCS := main.c \
+		$(EVENT_DIR)event.c \
+		$(GAME_DIR)free_game.c \
+		$(GAME_DIR)init.c \
+		$(GAME_DIR)render.c \
 		$(PARSING_DIR)check_map.c \
 		$(PARSING_DIR)checker.c \
+		$(PARSING_DIR)parsing.c \
 		$(PARSING_DIR)parsing_free.c \
 		$(PARSING_DIR)parsing_getter.c \
 		$(PARSING_DIR)parsing_reader.c \
+		$(TEXTURE_DIR)init_textures.c \
 		$(TEXTURE_DIR)texture.c \
+		$(VEC2_DIR)dvec2_utils1.c \
 		$(VEC2_DIR)vec2_utils1.c \
 		$(VEC2_DIR)vec2_utils2.c \
+		$(VEC2_DIR)vec_convert.c \
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)%.o, $(SRCS))
 

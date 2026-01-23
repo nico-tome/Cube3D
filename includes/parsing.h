@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:57:54 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/22 13:54:17 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/23 13:12:21 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,15 @@
 
 # include "vector2.h"
 # include "../lib/libft/libft.h"
-# include "cube3d.h"
 
 # define SPAWNS "NSEW"
 # define TILES "10 "
+
+typedef struct	s_map
+{
+	int		size;
+	char	**map;
+}				t_map;
 
 typedef struct	s_parsing_infos
 {

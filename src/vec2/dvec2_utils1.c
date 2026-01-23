@@ -1,57 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec2_utils1.c                                      :+:      :+:    :+:   */
+/*   devc2_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/15 16:33:58 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/23 13:19:43 by ntome            ###   ########.fr       */
+/*   Created: 2026/01/23 13:13:57 by ntome             #+#    #+#             */
+/*   Updated: 2026/01/23 13:21:44 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/vector2.h"
+#include "vector2.h"
 
-void	set_vec2(t_vec2 *vec2, int x, int y)
+void	set_dvec2(t_dvec2 *dvec2, double x, double y)
 {
-	vec2->x = x;
-	vec2->y = y;
+	dvec2->x = x;
+	dvec2->y = y;
 }
 
-t_vec2	vec2_add(t_vec2 v_1, t_vec2 v_2)
+t_dvec2	dvec2_add(t_dvec2 v_1, t_dvec2 v_2)
 {
-	t_vec2	result;
+	t_dvec2	result;
 
 	result.x = v_1.x + v_2.x;
 	result.y = v_1.y + v_2.y;
 	return (result);
 }
 
-t_vec2	vec2_sub(t_vec2 v_1, t_vec2 v_2)
+t_dvec2	dvec2_sub(t_dvec2 v_1, t_dvec2 v_2)
 {
-	t_vec2	result;
+	t_dvec2	result;
 
 	result.x = v_1.x - v_2.x;
 	result.y = v_1.y - v_2.y;
 	return (result);
 }
 
-t_vec2	vec2_mul(t_vec2 v_1, t_vec2 v_2)
+t_dvec2	dvec2_mul(t_dvec2 v_1, t_dvec2 v_2)
 {
-	t_vec2	result;
+	t_dvec2	result;
 
 	result.x = v_1.x * v_2.x;
 	result.y = v_1.y * v_2.y;
 	return (result);
 }
 
-t_vec2	vec2_div(t_vec2 v_1, t_vec2 v_2)
+t_dvec2	dvec2_div(t_dvec2 v_1, t_dvec2 v_2)
 {
-	t_vec2	result;
+	t_dvec2	result;
 
 	if (v_2.x == 0 || v_2.y == 0)
 	{
-		printf("Vector2, try a division by 0. Return v_1.\n");
+		printf("Vector 2, try a division by 0, return v_1.\n");
 		return (v_1);
 	}
 	result.x = v_1.x / v_2.x;

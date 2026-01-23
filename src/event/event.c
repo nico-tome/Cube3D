@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec2_utils2.c                                      :+:      :+:    :+:   */
+/*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/15 16:42:38 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/23 14:47:30 by ntome            ###   ########.fr       */
+/*   Created: 2026/01/23 14:10:11 by ntome             #+#    #+#             */
+/*   Updated: 2026/01/23 14:46:20 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/vector2.h"
+#include "cube3d.h"
+#include "keys.h"
 
-int	vec2_is_higher(t_vec2 v_1, t_vec2 v_2)
+void	key_hook(int key, void *param)
 {
-	return (v_1.y > v_2.y);
+	t_mlx	*mlx;
+
+	mlx = (t_mlx *)param;
+	if (key == KEY_ESC)
+		mlx_loop_end(mlx->mlx);
 }
 
-int	vec2_is_lower(t_vec2 v_1, t_vec2 v_2)
+void	mouse_hook(int button, void *param)
 {
-	return (v_1.y < v_2.y);
+	t_mlx	*mlx;
+
+	mlx = (t_mlx *)param;
+	(void)mlx;
+	(void)button;
 }
 
-int	vec2_is_left(t_vec2 v_1, t_vec2 v_2)
+void	window_hook(int event, void *param)
 {
-	return (v_1.x < v_2.x);
-}
+	t_mlx	*mlx;
 
-int	vec2_is_right(t_vec2 v_1, t_vec2 v_2)
-{
-	return (v_1.x > v_2.x);
-}
-
-void	vec2_print(t_vec2 vec2)
-{
-	printf("Vec2: x: %d, y: %d, adress: %p\n", vec2.x, vec2.y, &vec2);
+	mlx = (t_mlx *)param;
+	if (event == 0)
+		mlx_loop_end(mlx->mlx);
 }

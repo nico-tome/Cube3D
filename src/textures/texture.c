@@ -6,7 +6,7 @@
 /*   By: ntome <nicolas@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 20:33:47 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/22 14:05:51 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/23 13:49:12 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ mlx_color	get_color(char *str)
 	char		**rgb;
 	mlx_color	color;
 
-	rgb = ft_split(str, ';');
-	color.a = 255;
-	color.r = ft_atoi(rgb[0]);
-	color.g = ft_atoi(rgb[1]);
-	color.b = ft_atoi(rgb[2]);
+	rgb = ft_split(str, ',');
+	color.a = (uint8_t)255;
+	color.r = (uint8_t)ft_atoi(rgb[0]);
+	color.g = (uint8_t)ft_atoi(rgb[1]);
+	color.b = (uint8_t)ft_atoi(rgb[2]);
 	free_list(rgb);
 	return (color);
 }

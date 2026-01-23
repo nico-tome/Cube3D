@@ -6,23 +6,28 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:19:31 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/22 15:09:32 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/23 14:53:46 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 #include "parsing.h"
 #include "vector2.h"
+#include "texture.h"
+
+void	init_event(t_mlx *mlx)
+{
+	mlx_on_event(mlx->mlx, mlx->win, MLX_WINDOW_EVENT, window_hook, mlx);
+	mlx_on_event(mlx->mlx, mlx->win, MLX_KEYDOWN, key_hook, mlx);
+	mlx_on_event(mlx->mlx, mlx->win, MLX_MOUSEDOWN, mouse_hook, mlx);
+}
 
 void	loop(void *params)
 {
 	t_mlx	*mlx;
-	int		mid;
 
 	mlx = params;
-	mid = mlx->window_size.y / 2;
-	mlx_pixel_put_region(mlx->mlx, mlx->win, 0, 0, mlx->window_size.x, mid, mlx->ceiling);
-	mlx_pixel_put_region(mlx->mlx, mlx->win, 0, mid, mlx->window_size.x, mid, mlx->floor);
+	render_floor_ceiling(mlx, mlx->window_size.x, mlx->window_size.y / 2);
 }
 
 void	init_app(t_parsing_infos parsing_i)
@@ -37,17 +42,20 @@ void	init_app(t_parsing_infos parsing_i)
 	infos.height = 720;
 	mlx.win = mlx_new_window(mlx.mlx, &infos);
 	set_vec2(&mlx.window_size, 1280, 720);
-	init_textures(&mlx, parsing_i);
-	//init_player(&mlx, parsing_i);
+	init_textures(&mlx, &parsing_i);
+	init_player(&mlx, &parsing_i);
+	init_event(&mlx);
+	free_parsing(&parsing_i);
 	mlx_add_loop_hook(mlx.mlx, loop, &mlx);
 	mlx_loop(mlx.mlx);
+	free_game(&mlx);
 	mlx_destroy_window(mlx.mlx, mlx.win);
 	mlx_destroy_context(mlx.mlx);
 }
 
 int	main(int ac, char **av)
 {
-	t_parsing_infos parsing_i;
+	t_parsing_infos	parsing_i;
 
 	if (ac != 2)
 	{
@@ -62,6 +70,4 @@ int	main(int ac, char **av)
 		exit(EXIT_FAILURE);
 	}
 	init_app(parsing_i);
-	free_parsing(&parsing_i);
-	printf("ok\n");
 }

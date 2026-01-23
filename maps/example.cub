@@ -5,8 +5,8 @@ WE ./assets/Textures-16.png
 EA ./assets/Textures-16.png
 
 
-F 220,100,0
-C 225,30,0
+F 225,100,9
+C 56,15,120
 
 
         1111111111111111111111111
