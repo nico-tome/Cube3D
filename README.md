@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by ntome*
+*This project has been created as part of the 42 curriculum by ntome and ccouton*
 
 # Cube3D
 Cube3D project from 42 CC
@@ -66,4 +66,22 @@ If we have an error we will free every datas we have stored.
 <details open>
   <summary><i>See</i></summary>
   For rendering we used the [lodev article](https://lodev.org/cgtutor/raycasting.html) about raycasting.
+  
+  Firs we have a struct that will contain every variables needed to perform our raycast:
+
+  ```h
+typedef struct	s_ray
+{
+	double	cameraX;
+	double	perpWallDist;
+	t_dvec2	rayDir;
+	t_vec2	mapPos;
+	t_dvec2	sideDist;
+	t_dvec2	deltaDist;
+	t_vec2	step;
+	int		hit;
+	int		side;
+	int		draw;
+}				t_ray;
+  ```
 </details>
