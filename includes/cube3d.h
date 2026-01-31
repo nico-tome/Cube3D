@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:22:41 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/23 14:54:13 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/31 14:44:36 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 # include "../lib/MacroLibX/includes/mlx.h"
 # include "../lib/MacroLibX/includes/mlx_extended.h"
 # include "../lib/libft/libft.h"
-#include "parsing.h"
+# include "parsing.h"
 # include "vector2.h"
+# include "parsing.h"
 
 typedef struct	s_game_infos
 {
@@ -51,17 +52,21 @@ typedef struct s_mlx
 	t_game_infos	game_infos;
 	t_player		player;
 	t_map			map;
-	mlx_color		*floor;
-	mlx_color		*ceiling;
+	mlx_color		floor;
+	mlx_color		ceiling;
+	mlx_color		*drawing_line;
 	double			time;
 	double			old_time;
+	int				keys[256];
 }				t_mlx;
 
 void	init_player(t_mlx *mlx, t_parsing_infos *parsing);
+void	init_map(t_mlx *mlx, t_parsing_infos *parsing);
 void	key_hook(int key, void *param);
+void	key_up_hook(int key, void *param);
 void	mouse_hook(int button, void *param);
 void	window_hook(int event, void *param);
 void	free_game(t_mlx *mlx);
-void	render_floor_ceiling(t_mlx *mlx, int w, int h);
+void	raycasting(t_mlx *mlx);
 
 #endif

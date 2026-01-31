@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 15:01:08 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/23 14:04:48 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/31 10:20:43 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ void	init_color_list(int size, mlx_color **list, char *color)
 
 void	init_textures(t_mlx *mlx, t_parsing_infos *parsing)
 {
-	int	size;
-
-	size = mlx->window_size.x * (mlx->window_size.y / 2);
-	init_color_list(size, &(mlx->ceiling), parsing->ceiling_color);
-	init_color_list(size, &(mlx->floor), parsing->floor_color);
+	mlx->floor = get_color(parsing->floor_color);
+	mlx->ceiling = get_color(parsing->ceiling_color);
+	init_color_list(mlx->window_size.y, &(mlx->drawing_line), "0,0,0");
 }

@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:19:31 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/23 14:53:46 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/31 14:42:53 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_event(t_mlx *mlx)
 {
 	mlx_on_event(mlx->mlx, mlx->win, MLX_WINDOW_EVENT, window_hook, mlx);
 	mlx_on_event(mlx->mlx, mlx->win, MLX_KEYDOWN, key_hook, mlx);
+	mlx_on_event(mlx->mlx, mlx->win, MLX_KEYUP, key_up_hook, mlx);
 	mlx_on_event(mlx->mlx, mlx->win, MLX_MOUSEDOWN, mouse_hook, mlx);
 }
 
@@ -27,10 +28,11 @@ void	loop(void *params)
 	t_mlx	*mlx;
 
 	mlx = params;
-	render_floor_ceiling(mlx, mlx->window_size.x, mlx->window_size.y / 2);
+	mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){.rgba = 0x00FF00FF});
+	raycasting(mlx);
 }
 
-void	init_app(t_parsing_infos parsing_i)
+void	init_app(t_parsing_infos *parsing_i)
 {
 	t_mlx					mlx;
 	mlx_window_create_info	infos;
@@ -41,11 +43,14 @@ void	init_app(t_parsing_infos parsing_i)
 	infos.width = 1280;
 	infos.height = 720;
 	mlx.win = mlx_new_window(mlx.mlx, &infos);
+	mlx.map = parsing_i->map;
+	mlx.keys[255] = 1;
 	set_vec2(&mlx.window_size, 1280, 720);
-	init_textures(&mlx, &parsing_i);
-	init_player(&mlx, &parsing_i);
+	init_map(&mlx, parsing_i);
+	init_textures(&mlx, parsing_i);
+	init_player(&mlx, parsing_i);
 	init_event(&mlx);
-	free_parsing(&parsing_i);
+	free_parsing(parsing_i);
 	mlx_add_loop_hook(mlx.mlx, loop, &mlx);
 	mlx_loop(mlx.mlx);
 	free_game(&mlx);
@@ -69,5 +74,5 @@ int	main(int ac, char **av)
 		printf("PARSING ERROR !\n");
 		exit(EXIT_FAILURE);
 	}
-	init_app(parsing_i);
+	init_app(&parsing_i);
 }

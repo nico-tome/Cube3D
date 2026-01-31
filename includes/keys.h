@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 14:15:32 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/23 14:15:53 by ntome            ###   ########.fr       */
+/*   Updated: 2026/01/31 14:29:06 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@
 # define KEY_OBRACKET 47
 # define KEY_CBRACKET 48
 # define KEY_PIPE 49
-
-/* NUMPAD */
 
 # define KEY_0 98
 # define KEY_1 89
