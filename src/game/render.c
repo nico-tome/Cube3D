@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 14:50:41 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/31 14:22:58 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/04 23:36:27 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,29 +84,37 @@ void	init_draw(t_mlx *mlx, t_drawing *draw, t_ray *ray)
 	draw->drawEnd = draw->lineHeight / 2 + mlx->window_size.y / 2;
 	if (draw->drawEnd >= mlx->window_size.y)
 		draw->drawEnd = mlx->window_size.y - 1;
+	/*
+	//draw.texNum; //TODO faire la logique de detection.
+	if (ray->side == 0)
+		draw->wallX = mlx->player.pos.y + ray->perpWallDist * ray->rayDir.y;
+	else
+		draw->wallX = mlx->player.pos.x + ray->perpWallDist * ray->rayDir.x;
+	draw->tex.x = int(ray.wallX * double());
+	*/
 } 
 
-void	setup_line(t_mlx *mlx, t_drawing *draw, t_ray *ray)
+void	setup_line(t_mlx *mlx, t_drawing *draw, t_ray *ray, int x)
 {
 	int			i;
 
 	i = 0;
 	while (i < draw->drawStart)
 	{
-		mlx->drawing_line[i] = mlx->ceiling;
+		mlx->drawing_line[x + mlx->window_size.x * i] = mlx->ceiling;
 		i++;
 	}
-	while (i < draw->drawEnd)
+	while (i <= draw->drawEnd)
 	{
 		if (ray->side == 1)
-			mlx->drawing_line[i] = get_color("0,0,255,255");
+			mlx->drawing_line[x + mlx->window_size.x * i] = get_color("0,0,255,255");
 		else
-			mlx->drawing_line[i] = get_color("0,255,0,255");
+			mlx->drawing_line[x + mlx->window_size.x * i] = get_color("0,255,0,255");
 		i++;
 	}
 	while (i < mlx->window_size.y)
 	{
-		mlx->drawing_line[i] = mlx->floor;
+		mlx->drawing_line[x + mlx->window_size.x * i] = mlx->floor;
 		i++;
 	}
 }
@@ -127,9 +135,9 @@ void	raycasting(t_mlx *mlx)
 		else
 			ray.perpWallDist = (ray.sideDist.y - ray.deltaDist.y);
 		init_draw(mlx, &draw, &ray);
-		setup_line(mlx, &draw, &ray);
-		mlx_pixel_put_region(mlx->mlx, mlx->win, i, 0, 1,
-			mlx->window_size.y, mlx->drawing_line);
+		setup_line(mlx, &draw, &ray, i);
 		i++;
 	}
+	mlx_pixel_put_region(mlx->mlx, mlx->win, 0, 0, mlx->window_size.x,
+		mlx->window_size.y, mlx->drawing_line);
 }

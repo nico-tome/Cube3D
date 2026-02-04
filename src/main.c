@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:19:31 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/31 14:42:53 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/04 22:37:01 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,24 @@
 #include "vector2.h"
 #include "texture.h"
 
+long long	ft_get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_usec / 1000 + time.tv_sec * 1000);
+}
+
 void	init_event(t_mlx *mlx)
 {
+	int	i;
+
+	i = 0;
+	while (i < 255)
+	{
+		mlx->keys[i] = 0;
+		i++;
+	}
 	mlx_on_event(mlx->mlx, mlx->win, MLX_WINDOW_EVENT, window_hook, mlx);
 	mlx_on_event(mlx->mlx, mlx->win, MLX_KEYDOWN, key_hook, mlx);
 	mlx_on_event(mlx->mlx, mlx->win, MLX_KEYUP, key_up_hook, mlx);
@@ -26,10 +42,16 @@ void	init_event(t_mlx *mlx)
 void	loop(void *params)
 {
 	t_mlx	*mlx;
+	int		fps;
 
 	mlx = params;
+	move_player(mlx);
 	mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){.rgba = 0x00FF00FF});
 	raycasting(mlx);
+	mlx->old_time = mlx->time;
+	mlx->time = ft_get_time();
+	fps = (mlx->time - mlx->old_time) / 1000;
+	mlx_string_put(mlx->mlx, mlx->win, 5, 15, (mlx_color){.rgba = 0x00FF00FF}, ft_itoa(fps));
 }
 
 void	init_app(t_parsing_infos *parsing_i)
@@ -45,6 +67,7 @@ void	init_app(t_parsing_infos *parsing_i)
 	mlx.win = mlx_new_window(mlx.mlx, &infos);
 	mlx.map = parsing_i->map;
 	mlx.keys[255] = 1;
+	mlx.time = ft_get_time();
 	set_vec2(&mlx.window_size, 1280, 720);
 	init_map(&mlx, parsing_i);
 	init_textures(&mlx, parsing_i);
