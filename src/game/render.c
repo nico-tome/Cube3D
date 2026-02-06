@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 14:50:41 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/04 23:36:27 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/05 20:27:37 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,29 @@ void	init_draw(t_mlx *mlx, t_drawing *draw, t_ray *ray)
 	draw->drawEnd = draw->lineHeight / 2 + mlx->window_size.y / 2;
 	if (draw->drawEnd >= mlx->window_size.y)
 		draw->drawEnd = mlx->window_size.y - 1;
-	/*
-	//draw.texNum; //TODO faire la logique de detection.
-	if (ray->side == 0)
-		draw->wallX = mlx->player.pos.y + ray->perpWallDist * ray->rayDir.y;
-	else
+	if (ray->side == 1)
+	{
 		draw->wallX = mlx->player.pos.x + ray->perpWallDist * ray->rayDir.x;
-	draw->tex.x = int(ray.wallX * double());
-	*/
+		if (ray->rayDir.y > 0)
+			draw->texture = mlx->we_wall;
+		else
+			draw->texture = mlx->ea_wall;
+	}
+	else
+	{
+		draw->wallX = mlx->player.pos.y + ray->perpWallDist * ray->rayDir.y;
+		if (ray->rayDir.x > 0)
+			draw->texture = mlx->so_wall;
+		else
+			draw->texture = mlx->no_wall;
+	}
+	draw->wallX -= floor(draw->wallX);
+	draw->step = 1.0 * draw->texture.texture_height / draw->lineHeight;
 } 
 
 void	setup_line(t_mlx *mlx, t_drawing *draw, t_ray *ray, int x)
 {
-	int			i;
+	int		i;
 
 	i = 0;
 	while (i < draw->drawStart)
@@ -104,12 +114,15 @@ void	setup_line(t_mlx *mlx, t_drawing *draw, t_ray *ray, int x)
 		mlx->drawing_line[x + mlx->window_size.x * i] = mlx->ceiling;
 		i++;
 	}
+	draw->tex.x = (int)(draw->wallX * (double)draw->texture.texture_width);
+	if ((ray->side == 0 && ray->rayDir.x > 0) || (ray->side == 1 && ray->rayDir.y < 0))
+		draw->tex.x = draw->texture.texture_width - draw->tex.x - 1;
+	draw->texPos = (draw->drawStart - mlx->window_size.y / 2 + draw->lineHeight / 2) * draw->step;
 	while (i <= draw->drawEnd)
 	{
-		if (ray->side == 1)
-			mlx->drawing_line[x + mlx->window_size.x * i] = get_color("0,0,255,255");
-		else
-			mlx->drawing_line[x + mlx->window_size.x * i] = get_color("0,255,0,255");
+		draw->tex.y = (int)draw->texPos & (draw->texture.texture_height - 1);
+		draw->texPos += draw->step;
+		mlx->drawing_line[x + mlx->window_size.x * i] = mlx_get_image_pixel(mlx->mlx, draw->texture.texture, draw->tex.x, draw->tex.y);
 		i++;
 	}
 	while (i < mlx->window_size.y)

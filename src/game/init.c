@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 11:23:48 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/31 10:09:57 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/05 20:59:52 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_vec2	get_spawn(char **map)
 void	init_player(t_mlx *mlx, t_parsing_infos *parsing)
 {
 	char	spawn;
+
 	mlx->player.pos = vec2_to_dvec2(get_spawn(parsing->map.map));
 	mlx->player.pos = dvec2_add(mlx->player.pos, (t_dvec2){.x = 0.5, .y = 0.5});
 	mlx->player.vel = 0;
@@ -48,7 +49,8 @@ void	init_player(t_mlx *mlx, t_parsing_infos *parsing)
 		set_dvec2(&mlx->player.rot, 1, 0);
 	else
 		set_dvec2(&mlx->player.rot, -1, 0);
-	set_dvec2(&mlx->player.plane, -mlx->player.rot.y * 0.66, mlx->player.rot.x * 0.66);
+	set_dvec2(&mlx->player.plane, -mlx->player.rot.y * 0.66,
+		mlx->player.rot.x * 0.66);
 }
 
 void	init_map(t_mlx *mlx, t_parsing_infos *parsing)
@@ -62,7 +64,7 @@ void	init_map(t_mlx *mlx, t_parsing_infos *parsing)
 	i = 0;
 	while (i < parsing->map.size)
 	{
-		mlx->map.map[i] = malloc(sizeof(char) * (ft_strlen(parsing->map.map[i]) + 1));
+		mlx->map.map[i] = malloc(ft_strlen(parsing->map.map[i]) + 1);
 		if (!mlx->map.map[i])
 			return ;
 		j = 0;

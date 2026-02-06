@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:22:41 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/31 14:44:36 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/05 11:23:19 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,17 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <math.h>
+# include <sys/time.h>
 # include "../lib/MacroLibX/includes/mlx.h"
 # include "../lib/MacroLibX/includes/mlx_extended.h"
 # include "../lib/libft/libft.h"
 # include "parsing.h"
+# include "texture.h"
 # include "vector2.h"
 # include "parsing.h"
+
+# define SPEED 0.2
+# define ROT_SPEED 0.05
 
 typedef struct	s_game_infos
 {
@@ -51,6 +56,10 @@ typedef struct s_mlx
 	t_vec2			window_size;
 	t_game_infos	game_infos;
 	t_player		player;
+	t_texture		no_wall;
+	t_texture		so_wall;
+	t_texture		ea_wall;
+	t_texture		we_wall;
 	t_map			map;
 	mlx_color		floor;
 	mlx_color		ceiling;
@@ -68,5 +77,7 @@ void	mouse_hook(int button, void *param);
 void	window_hook(int event, void *param);
 void	free_game(t_mlx *mlx);
 void	raycasting(t_mlx *mlx);
+void	move_player(t_mlx *mlx);
+void	init_textures(t_mlx *mlx, t_parsing_infos *parsing);
 
 #endif

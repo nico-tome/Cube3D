@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:19:31 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/04 22:37:01 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/05 20:39:06 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,11 @@ void	init_event(t_mlx *mlx)
 void	loop(void *params)
 {
 	t_mlx	*mlx;
-	int		fps;
 
 	mlx = params;
 	move_player(mlx);
 	mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){.rgba = 0x00FF00FF});
 	raycasting(mlx);
-	mlx->old_time = mlx->time;
-	mlx->time = ft_get_time();
-	fps = (mlx->time - mlx->old_time) / 1000;
-	mlx_string_put(mlx->mlx, mlx->win, 5, 15, (mlx_color){.rgba = 0x00FF00FF}, ft_itoa(fps));
 }
 
 void	init_app(t_parsing_infos *parsing_i)

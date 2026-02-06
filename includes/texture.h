@@ -6,7 +6,7 @@
 /*   By: ntome <nicolas@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 17:01:20 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/31 10:20:56 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/05 11:23:17 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "../lib/MacroLibX/includes/mlx.h"
 # include "../lib/MacroLibX/includes/mlx_extended.h"
 # include "parsing.h"
-# include "cube3d.h"
 
 typedef struct	s_texture
 {
@@ -39,6 +38,5 @@ int			is_correct_color(char *color);
 mlx_color	get_color(char *color);
 void		new_texture(mlx_context mlx, t_texture *texture, char *path);
 void		free_texture(t_texture *texture);
-void		init_textures(t_mlx *mlx, t_parsing_infos *parsing);
 
 #endif
