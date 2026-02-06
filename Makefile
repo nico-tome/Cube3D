@@ -13,6 +13,7 @@ SRCS := main.c \
 		$(EVENT_DIR)event.c \
 		$(GAME_DIR)free_game.c \
 		$(GAME_DIR)init.c \
+		$(GAME_DIR)player.c \
 		$(GAME_DIR)render.c \
 		$(PARSING_DIR)check_map.c \
 		$(PARSING_DIR)checker.c \
@@ -37,7 +38,7 @@ LIBS := lib/libft/libft.a \
 
 CC := cc
 
-FLAGS := -g -Wall -Werror -Wextra
+FLAGS := -g -pg -Wall -Werror -Wextra
 
 all: ${NAME} header
 
