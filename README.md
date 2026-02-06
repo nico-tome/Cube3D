@@ -84,4 +84,22 @@ typedef struct	s_ray
 	int		draw;
 }				t_ray;
   ```
+
+We start by initialyze all variables we need:
+
+```c
+ray->cameraX = 2 * x / (double)(mlx->window_size.x) - 1;
+ray->rayDir.x = mlx->player.rot.x + mlx->player.plane.x * ray->cameraX;
+ray->rayDir.y = mlx->player.rot.y + mlx->player.plane.y * ray->cameraX;
+ray->mapPos = dvec2_to_vec2(mlx->player.pos);
+if (ray->rayDir.x == 0.0)
+	ray->deltaDist.x = 1e30;
+else
+	ray->deltaDist.x = fabs(1 / ray->rayDir.x);
+if (ray->rayDir.y == 0.0)
+	ray->deltaDist.y = 1e30;
+else
+	ray->deltaDist.y = fabs(1 / ray->rayDir.y);
+ray->hit = 0;
+```
 </details>
