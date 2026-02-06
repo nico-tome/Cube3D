@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:19:31 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/06 21:07:19 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/05 20:39:06 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "parsing.h"
 #include "vector2.h"
 #include "texture.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 long long	ft_get_time(void)
 {
@@ -94,9 +92,5 @@ int	main(int ac, char **av)
 		printf("PARSING ERROR !\n");
 		exit(EXIT_FAILURE);
 	}
-	system("curl https://thispersondoesnotexist.com/ --output assets/face1.jpeg");
-	system("curl https://thispersondoesnotexist.com/ --output assets/face2.jpeg");
-	system("curl https://thispersondoesnotexist.com/ --output assets/face3.jpeg");
-	system("curl https://thispersondoesnotexist.com/ --output assets/face4.jpeg");
 	init_app(&parsing_i);
 }

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:42:36 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/06 16:43:51 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/06 19:49:54 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "vector2.h"
+#include "parsing_bonus.h"
+#include "vector2_bonus.h"
 
 int	need_to_check(char c)
 {

@@ -28,6 +28,25 @@ SRCS := main.c \
 		$(VEC2_DIR)vec2_utils2.c \
 		$(VEC2_DIR)vec_convert.c \
 
+SRCS_BONUS := main_bonus.c \
+			  $(EVENT_DIR)event_bonus.c \
+			  $(GAME_DIR)free_game_bonus.c \
+			  $(GAME_DIR)init_bonus.c \
+			  $(GAME_DIR)player_bonus.c \
+			  $(GAME_DIR)render_bonus.c \
+			  $(PARSING_DIR)check_map_bonus.c \
+			  $(PARSING_DIR)checker_bonus.c \
+			  $(PARSING_DIR)parsing_bonus.c \
+			  $(PARSING_DIR)parsing_free_bonus.c \
+			  $(PARSING_DIR)parsing_getter_bonus.c \
+			  $(PARSING_DIR)parsing_reader_bonus.c \
+			  $(TEXTURE_DIR)init_textures_bonus.c \
+			  $(TEXTURE_DIR)texture_bonus.c \
+			  $(VEC2_DIR)dvec2_utils1_bonus.c \
+			  $(VEC2_DIR)vec2_utils1_bonus.c \
+			  $(VEC2_DIR)vec2_utils2_bonus.c \
+			  $(VEC2_DIR)vec_convert_bonus.c \
+
 OBJ := $(patsubst %.c, $(BUILD_DIR)%.o, $(SRCS))
 
 HEADERS := includes/
@@ -38,7 +57,7 @@ LIBS := lib/libft/libft.a \
 
 CC := cc
 
-FLAGS := -g -pg -Wall -Werror -Wextra
+FLAGS := -g -Wall -Werror -Wextra
 
 all: ${NAME} header
 
@@ -62,7 +81,7 @@ header:
 	@echo "༺✧༒─────────────────────────────────────────────────────────────────────────────────────────────────────────────────༒✧༻\n"
 	@echo "\033[0m"
 
-header:
+header_bonus:
 	@echo "\n"
 	@echo "\033[38;5;51m"
 	@echo "༺✧༒─────────────────────────────────────────────────────────────────────────────────────────────────────────────────༒✧༻\n"
@@ -73,10 +92,10 @@ header:
 	@echo " ██║     ██║   ██║██████╔╝█████╗   █████╔╝██║  ██║                                                                     "
 	@echo " ██║     ██║   ██║██╔══██╗██╔══╝   ╚═══██╗██║  ██║\033[0m \033[38;5;28m                                                "
 	@echo " ╚██████╗╚██████╔╝██████╔╝███████╗██████╔╝██████╔╝                                                                     "
-	@echo "  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═════╝ ╚═════╝                                                                      "
+	@echo "  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═════╝ ╚═════╝     bonus                                                            "
 	@echo "\033[0m \033[38;5;178m"
 	@echo "\n - Move with WASD"
-	@echo " - "
+	@echo " - Open and close door with E"
 	@echo " - Exit with ESC"
 	@echo "\n - Made by ntome and ccouton\n"
 	@echo "\033[38;5;51m"
@@ -102,7 +121,7 @@ ${BUILD_DIR_BONUS}%.o: ${SRC_BONUS_DIR}%.c
 
 bonus: ${LIBS} ${OBJ_BONUS}
 	@echo "\033[38;5;46m✅ Cube3D bonus compiled !\033[0m"
-	@${CC} -o ${NAME_BONUS} -I ${HEADERS_BONUS} ${OBJ_BONUS} ${LIBS} ${FLAGS} -lm -lSDL2
+	@${CC} -o ${NAME_BONUS} -I ${HEADERS_BONUS} ${OBJ_BONUS} ${LIBS} ${FLAGS} -no-pie -lm -lSDL2
 
 clean:
 	@make --no-print-directory -C lib/MacroLibX clean
