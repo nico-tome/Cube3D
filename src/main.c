@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:19:31 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/06 21:07:19 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/07 16:20:27 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,26 @@ void	init_app(t_parsing_infos *parsing_i)
 	mlx_window_create_info	infos;
 
 	mlx.mlx = mlx_init();
-	infos = (mlx_window_create_info){0};
+	infos = (mlx_window_create_info){.width = 1280, .height = 720};
 	infos.title = "Cube3D";
-	infos.width = 1280;
-	infos.height = 720;
 	mlx.win = mlx_new_window(mlx.mlx, &infos);
 	mlx.map = parsing_i->map;
 	mlx.keys[255] = 1;
 	mlx.time = ft_get_time();
 	set_vec2(&mlx.window_size, 1280, 720);
 	init_map(&mlx, parsing_i);
-	init_textures(&mlx, parsing_i);
+	if (!init_textures(&mlx, parsing_i))
+	{
+		free_parsing(parsing_i);
+		free_mlx(&mlx);
+		return ;
+	}
 	init_player(&mlx, parsing_i);
 	init_event(&mlx);
 	free_parsing(parsing_i);
 	mlx_add_loop_hook(mlx.mlx, loop, &mlx);
 	mlx_loop(mlx.mlx);
-	free_game(&mlx);
-	mlx_destroy_window(mlx.mlx, mlx.win);
-	mlx_destroy_context(mlx.mlx);
+	free_mlx(&mlx);
 }
 
 int	main(int ac, char **av)

@@ -1,0 +1,13 @@
+NO ./assets/Animal_02-256x256.png
+SO ./assets/Wall_05-128x128.png
+
+WE ./assets/Ground_08-128x128.png
+EA ./assets/Ground_08-128x128.png
+
+
+F 225,100,9
+C 56,15,120
+
+11111
+10N01
+1111

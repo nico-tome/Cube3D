@@ -21,6 +21,244 @@
   "arguments": [
    "cc",
    "-o",
+   "build/event/event.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/event/event.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/event/event.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/game/free_game.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/game/free_game.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/game/free_game.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/game/init.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/game/init.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/game/init.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/game/player.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/game/player.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/game/player.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/game/render.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/game/render.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/game/render.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/parsing/check_map.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/parsing/check_map.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/parsing/check_map.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/parsing/checker.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/parsing/checker.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/parsing/checker.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/parsing/parsing.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/parsing/parsing.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/parsing/parsing.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/parsing/parsing_free.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/parsing/parsing_free.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/parsing/parsing_free.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/parsing/parsing_getter.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/parsing/parsing_getter.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/parsing/parsing_getter.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/parsing/parsing_reader.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/parsing/parsing_reader.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/parsing/parsing_reader.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/textures/init_textures.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/textures/init_textures.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/textures/init_textures.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/textures/texture.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/textures/texture.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/textures/texture.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
+   "build/vec2/dvec2_utils1.o",
+   "-I",
+   "includes/",
+   "-c",
+   "src/vec2/dvec2_utils1.c",
+   "-g",
+   "-Wall",
+   "-Werror",
+   "-Wextra"
+  ],
+  "file": "src/vec2/dvec2_utils1.c"
+ },
+ {
+  "directory": "/home/ntome/Documents/cube",
+  "arguments": [
+   "cc",
+   "-o",
    "build/vec2/vec2_utils1.o",
    "-I",
    "includes/",
@@ -55,16 +293,16 @@
   "arguments": [
    "cc",
    "-o",
-   "build/parsing/parsing.o",
+   "build/vec2/vec_convert.o",
    "-I",
    "includes/",
    "-c",
-   "src/parsing/parsing.c",
+   "src/vec2/vec_convert.c",
    "-g",
    "-Wall",
    "-Werror",
    "-Wextra"
   ],
-  "file": "src/parsing/parsing.c"
+  "file": "src/vec2/vec_convert.c"
  }
 ]
