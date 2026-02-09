@@ -34,6 +34,7 @@ SRCS := main.c \
 
 SRCS_BONUS := main_bonus.c \
 			  $(EVENT_DIR)event_bonus.c \
+			  $(GAME_DIR)ceiling_floor_bonus.c \
 			  $(GAME_DIR)free_game_bonus.c \
 			  $(GAME_DIR)init_bonus.c \
 			  $(GAME_DIR)player_bonus.c \
@@ -125,7 +126,9 @@ ${BUILD_DIR_BONUS}%.o: ${SRC_BONUS_DIR}%.c
 	@mkdir -p $(dir $@)
 	@${CC} -o $@ -I ${HEADERS_BONUS} -c $< ${FLAGS}
 
-bonus: ${LIBS} ${OBJ_BONUS} header_bonus
+bonus: ${NAME_BONUS} header_bonus
+
+${NAME_BONUS}: ${LIBS} ${OBJ_BONUS}
 	@echo "\033[38;5;46m✅ Cube3D bonus compiled !\033[0m"
 	@${CC} -o ${NAME_BONUS} -I ${HEADERS_BONUS} ${OBJ_BONUS} ${LIBS} ${FLAGS} -no-pie -lm -lSDL2
 

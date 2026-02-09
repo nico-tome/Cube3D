@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:19:31 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/07 16:20:27 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/09 11:37:50 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	init_app(t_parsing_infos *parsing_i)
 	init_map(&mlx, parsing_i);
 	if (!init_textures(&mlx, parsing_i))
 	{
+		printf("Error\nA texture path do not link a texture file.\n");
 		free_parsing(parsing_i);
 		free_mlx(&mlx);
 		return ;
@@ -92,12 +93,7 @@ int	main(int ac, char **av)
 	if (!parsing_i.result)
 	{
 		free_parsing(&parsing_i);
-		printf("PARSING ERROR !\n");
 		exit(EXIT_FAILURE);
 	}
-	system("curl https://thispersondoesnotexist.com/ --output assets/face1.jpeg");
-	system("curl https://thispersondoesnotexist.com/ --output assets/face2.jpeg");
-	system("curl https://thispersondoesnotexist.com/ --output assets/face3.jpeg");
-	system("curl https://thispersondoesnotexist.com/ --output assets/face4.jpeg");
 	init_app(&parsing_i);
 }

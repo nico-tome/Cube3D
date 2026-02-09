@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:42:36 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/06 16:43:51 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/09 11:51:01 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ int	check_close(char **map)
 			if (need_to_check(map[reader.y][reader.x]))
 			{
 				if (!check(map, reader))
+				{
+					printf("Error\nMap not close %d;%d\n", reader.y, reader.x);
 					return (0);
+				}
 			}
 			reader.x++;
 		}

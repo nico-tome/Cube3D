@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:02:23 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/07 15:37:08 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/09 11:32:38 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,8 @@ void	parsing(t_parsing_infos *parsing_i, char *path)
 	if (parsing_i->raw_datas != NULL)
 		parsing_i->result = check_datas(parsing_i);
 	else
+	{
 		parsing_i->result = 0;
+		printf("Error\n'%s' can't be open !\n", path);
+	}
 }

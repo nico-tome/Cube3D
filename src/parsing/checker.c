@@ -6,7 +6,7 @@
 /*   By: ntome <nicolas@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:35:48 by ntome             #+#    #+#             */
-/*   Updated: 2026/01/22 15:46:15 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/09 11:49:43 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ int	check_map(char **map)
 			printf("Error\n Empty line in the map at line %d !\n", line);
 			return (0);
 		}
-		check_line(map[line], &has_spawn, line);
+		if (!check_line(map[line], &has_spawn, line))
+			return (0);
 		line++;
 	}
 	if (!has_spawn)
