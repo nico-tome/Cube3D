@@ -53,7 +53,8 @@ void	loop(void *params)
 	move_player(mlx);
 	mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){.rgba = 0x00FF00FF});
 	raycasting(mlx);
-	mlx_string_put(mlx->mlx, mlx->win, 50, 50,
+	draw_minimap(mlx, &mlx->game_infos, &mlx->player);
+	mlx_string_put(mlx->mlx, mlx->win, mlx->window_size.x - 100, 50,
 		(mlx_color){.rgba = COLOR_RED}, fps);
 	free(fps);
 }
@@ -75,15 +76,15 @@ void	init_app(t_parsing_infos *parsing_i)
 	if (!init_textures(&mlx, parsing_i))
 	{
 		printf("Error\nA texture path do not link a texture file.\n");
-		free_parsing(parsing_i);
 		free_mlx(&mlx);
+		free_parsing(parsing_i);
 		return ;
 	}
 	init_player(&mlx, parsing_i);
 	init_event(&mlx);
-	free_parsing(parsing_i);
 	mlx_add_loop_hook(mlx.mlx, loop, &mlx);
 	mlx_loop(mlx.mlx);
+	free_parsing(parsing_i);
 	free_mlx(&mlx);
 }
 

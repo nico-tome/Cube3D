@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ccouton <ccouton@42angouleme.fr>          +#+  +:+       +#+         */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 11:23:48 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/09 12:35:48 by ntome            ###   ########.fr       */
+/*   Created: 2026/01/23 11:23:48 by ccouton         #+#    #+#               */
+/*   Updated: 2026/02/15 00:00:00 by ccouton        ###   ########.fr         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,64 @@
 #include "parsing_bonus.h"
 #include "vector2_bonus.h"
 
-t_vec2	get_spawn(char **map)
+void	init_doors(t_mlx *mlx)
 {
-	t_vec2	reader;
+	int	y;
+	int	x;
 
-	reader.y = 0;
-	while (map[reader.y])
+	mlx->door_count = 0;
+	y = 0;
+	while (mlx->map.map[y])
 	{
-		reader.x = 0;
-		while (map[reader.y][reader.x])
+		x = 0;
+		while (mlx->map.map[y][x])
 		{
-			if (ft_strchr(SPAWNS, map[reader.y][reader.x]))
-				return (reader);
-			reader.x++;
+			if (mlx->map.map[y][x] == 'D')
+			{
+				mlx->doors[mlx->door_count].x = x;
+				mlx->doors[mlx->door_count].y = y;
+				mlx->doors[mlx->door_count].open = 0;
+				mlx->door_count++;
+			}
+			x++;
 		}
-		reader.y++;
+		y++;
 	}
-	return (reader);
 }
 
-void	init_player(t_mlx *mlx, t_parsing_infos *parsing)
+static double	get_door_distance(t_mlx *mlx, int door_idx)
 {
-	char	spawn;
+	double	door_x;
+	double	door_y;
 
-	mlx->player.pos = vec2_to_dvec2(get_spawn(parsing->map.map));
-	mlx->player.pos = dvec2_add(mlx->player.pos, (t_dvec2){.x = 0.5, .y = 0.5});
-	mlx->player.vel = 0;
-	spawn = parsing->map.map[(int)mlx->player.pos.y][(int)mlx->player.pos.x];
-	if (spawn == 'N')
-		set_dvec2(&mlx->player.rot, 0, -1);
-	else if (spawn == 'S')
-		set_dvec2(&mlx->player.rot, 0, 1);
-	else if (spawn == 'E')
-		set_dvec2(&mlx->player.rot, 1, 0);
-	else
-		set_dvec2(&mlx->player.rot, -1, 0);
-	set_dvec2(&mlx->player.plane, -mlx->player.rot.y * 0.66,
-		mlx->player.rot.x * 0.66);
+	door_x = mlx->doors[door_idx].x + 0.5;
+	door_y = mlx->doors[door_idx].y + 0.5;
+	return (sqrt(pow(mlx->player.pos.x - door_x, 2)
+			+ pow(mlx->player.pos.y - door_y, 2)));
+}
+
+void	toggle_door(t_mlx *mlx)
+{
+	int		i;
+	double	closest_distance;
+	int		closest_door;
+	double	distance;
+
+	closest_distance = 2.0;
+	closest_door = -1;
+	i = 0;
+	while (i < mlx->door_count)
+	{
+		distance = get_door_distance(mlx, i);
+		if (distance < closest_distance)
+		{
+			closest_distance = distance;
+			closest_door = i;
+		}
+		i++;
+	}
+	if (closest_door != -1)
+		mlx->doors[closest_door].open = !mlx->doors[closest_door].open;
 }
 
 void	init_map(t_mlx *mlx, t_parsing_infos *parsing)
@@ -77,4 +98,7 @@ void	init_map(t_mlx *mlx, t_parsing_infos *parsing)
 		i++;
 	}
 	mlx->map.map[i] = NULL;
+	init_doors(mlx);
+	if (!mlx->map.map)
+		return ;
 }

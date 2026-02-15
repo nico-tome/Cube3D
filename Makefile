@@ -37,7 +37,9 @@ SRCS_BONUS := main_bonus.c \
 			  $(GAME_DIR)ceiling_floor_bonus.c \
 			  $(GAME_DIR)free_game_bonus.c \
 			  $(GAME_DIR)init_bonus.c \
+			  $(GAME_DIR)minimap_bonus.c \
 			  $(GAME_DIR)player_bonus.c \
+			  $(GAME_DIR)player_init_bonus.c \
 			  $(GAME_DIR)raycasting_utils_bonus.c \
 			  $(GAME_DIR)render_bonus.c \
 			  $(PARSING_DIR)check_map_bonus.c \

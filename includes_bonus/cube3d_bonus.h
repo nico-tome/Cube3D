@@ -32,6 +32,14 @@
 # define COLOR_GREEN	0x00FF00FF
 # define SPEED 0.2
 # define ROT_SPEED 0.05
+# define MAX_DOORS 64
+
+typedef struct s_door
+{
+	int	x;
+	int	y;
+	int	open;
+}	t_door;
 
 typedef struct s_game_infos
 {
@@ -40,8 +48,6 @@ typedef struct s_game_infos
 	char		*so;
 	char		*we;
 	char		*ea;
-	mlx_color	*floor;
-	mlx_color	*ceiling;
 }				t_game_infos;
 
 typedef struct s_player
@@ -71,13 +77,16 @@ typedef struct s_mlx
 	t_player		player;
 	t_textures_set	textures;
 	t_map			map;
+	mlx_color		floor_color;
+	mlx_color		ceiling_color;
 	mlx_color		*draw_line;
 	double			time;
 	double			old_time;
 	int				keys[256];
+	t_door			doors[MAX_DOORS];
+	int				door_count;
 }				t_mlx;
 
-void	init_player(t_mlx *mlx, t_parsing_infos *parsing);
 void	init_map(t_mlx *mlx, t_parsing_infos *parsing);
 void	key_hook(int key, void *param);
 void	key_up_hook(int key, void *param);
@@ -87,6 +96,10 @@ void	free_game(t_mlx *mlx);
 void	raycasting(t_mlx *mlx);
 void	move_player(t_mlx *mlx);
 int		init_textures(t_mlx *mlx, t_parsing_infos *parsing);
+void	init_doors(t_mlx *mlx);
+void	toggle_door(t_mlx *mlx);
+void	init_player(t_mlx *mlx, t_parsing_infos *parsing);
+void	draw_minimap(t_mlx *mlx, t_game_infos *game, t_player *player);
 void	free_mlx(t_mlx *mlx);
 
 #endif

@@ -20,6 +20,8 @@ void	key_hook(int key, void *param)
 	mlx = (t_mlx *)param;
 	if (key == KEY_ESC)
 		mlx_loop_end(mlx->mlx);
+	if (key == KEY_E)
+		toggle_door(mlx);
 	mlx->keys[key] = 1;
 }
 

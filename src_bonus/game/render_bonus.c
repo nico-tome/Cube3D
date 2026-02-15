@@ -53,6 +53,8 @@ void	dda(t_mlx *mlx, t_ray *ray)
 		}
 		if (mlx->map.map[ray->map_pos.y][ray->map_pos.x] == '1')
 			ray->hit = 1;
+		if (is_door_hit(mlx, ray))
+			ray->hit = 1;
 	}
 }
 

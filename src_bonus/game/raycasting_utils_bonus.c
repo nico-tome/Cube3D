@@ -68,3 +68,19 @@ mlx_color	get_tex_color(t_mlx *mlx, t_drawing *draw)
 			draw->tex.x, draw->tex.y);
 	return (color);
 }
+
+int	is_door_hit(t_mlx *mlx, t_ray *ray)
+{
+	int	i;
+
+	i = 0;
+	while (i < mlx->door_count)
+	{
+		if (mlx->doors[i].x == ray->map_pos.x
+			&& mlx->doors[i].y == ray->map_pos.y
+			&& mlx->doors[i].open == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}

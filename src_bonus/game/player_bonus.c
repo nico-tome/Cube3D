@@ -13,14 +13,25 @@
 #include <cube3d_bonus.h>
 #include <keys_bonus.h>
 
-static	void	try_move(t_mlx *mlx, double dx, double dy)
+static void	try_move(t_mlx *mlx, double dx, double dy)
 {
 	double	new_x;
 	double	new_y;
+	int		i;
+	int		is_door_blocked;
 
 	new_x = mlx->player.pos.x + dx;
 	new_y = mlx->player.pos.y + dy;
-	if (mlx->map.map[(int)new_y][(int)new_x] != '1')
+	is_door_blocked = 0;
+	i = 0;
+	while (i < mlx->door_count)
+	{
+		if (mlx->doors[i].x == (int)new_x && mlx->doors[i].y == (int)new_y
+			&& mlx->doors[i].open == 0)
+			is_door_blocked = 1;
+		i++;
+	}
+	if (mlx->map.map[(int)new_y][(int)new_x] != '1' && !is_door_blocked)
 	{
 		mlx->player.pos.x = new_x;
 		mlx->player.pos.y = new_y;

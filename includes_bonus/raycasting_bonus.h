@@ -51,5 +51,6 @@ double		get_tex_pos(t_mlx *mlx, t_drawing *draw);
 mlx_color	get_tex_color(t_mlx *mlx, t_drawing *draw);
 mlx_color	get_ceiling(t_mlx *mlx, int x, int y);
 mlx_color	get_floor(t_mlx *mlx, int x, int y);
+int			is_door_hit(t_mlx *mlx, t_ray *ray);
 
 #endif
