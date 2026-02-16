@@ -1,8 +1,8 @@
-NO ./assets/face1.jpeg
-SO ./assets/face2.jpeg
+NO ./assets/brickwall.png
+SO ./assets/brickwall01.png
 
-WE ./assets/face3.jpeg
-EA ./assets/face4.jpeg
+WE ./assets/brickwall03.png
+EA ./assets/brickwall04.pngc
 
 
 F 225,100,9

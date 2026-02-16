@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:22:41 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/10 00:32:27 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/16 12:17:19 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_mlx
 	mlx_color		floor_color;
 	mlx_color		ceiling_color;
 	mlx_color		*draw_line;
+	mlx_color		minimap[73984];
 	double			time;
 	double			old_time;
 	int				keys[256];
@@ -99,7 +100,9 @@ int		init_textures(t_mlx *mlx, t_parsing_infos *parsing);
 void	init_doors(t_mlx *mlx);
 void	toggle_door(t_mlx *mlx);
 void	init_player(t_mlx *mlx, t_parsing_infos *parsing);
-void	draw_minimap(t_mlx *mlx, t_game_infos *game, t_player *player);
+void	draw_minimap(t_mlx *mlx);
 void	free_mlx(t_mlx *mlx);
+void	init_player(t_mlx *mlx, t_parsing_infos *parsing);
+t_vec2	get_spawn(char **map);
 
 #endif

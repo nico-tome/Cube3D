@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:19:31 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/10 00:32:48 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/16 17:31:20 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	loop(void *params)
 	move_player(mlx);
 	mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){.rgba = 0x00FF00FF});
 	raycasting(mlx);
-	draw_minimap(mlx, &mlx->game_infos, &mlx->player);
+	draw_minimap(mlx);
 	mlx_string_put(mlx->mlx, mlx->win, mlx->window_size.x - 100, 50,
 		(mlx_color){.rgba = COLOR_RED}, fps);
 	free(fps);
