@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 00:00:00 by ccouton           #+#    #+#             */
-/*   Updated: 2026/02/16 17:20:55 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/18 17:02:50 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,25 @@ int	is_empty(char c)
 	return (0);
 }
 
+mlx_color	get_color_tile(char tile)
+{
+	mlx_color	color;
+
+	if (tile == 'D')
+		color.rgba = 0x00FF55FF;
+	if (tile == '1')
+		color.rgba = 0x555555FF;
+	if (is_empty(tile))
+		color.rgba = 0xDDDDDDFF;
+	return (color);
+}
+
 void	fill_buffer(t_mlx *mlx, t_vec2 camera, int tile_num)
 {
 	t_vec2		r;
 	t_vec2		pos;
+	char		tile;
+	int			size;
 	mlx_color	color;
 
 	r.y = 0;
@@ -50,14 +65,12 @@ void	fill_buffer(t_mlx *mlx, t_vec2 camera, int tile_num)
 		r.x = 0;
 		while (r.x < tile_num)
 		{
+			size = (int)ft_strlen(mlx->map.map[r.y + camera.y]);
+			tile = mlx->map.map[r.y + camera.y][r.x + camera.x];
 			if (r.y + camera.y == (int)pos.y && r.x + camera.x == (int)pos.x)
 				color.rgba = 0xFF0000FF;
-			else if (mlx->map.map[r.y + camera.y][r.x + camera.x] == '1')
-				color.rgba = 0x555555FF;
-			else if (is_empty(mlx->map.map[r.y + camera.y][r.x + camera.x]))
-				color.rgba = 0xDDDDDDFF;
-			else if (mlx->map.map[r.y + camera.y][r.x + camera.x] == 'D')
-				color.rgba = 0x00FF55FF;
+			else if (r.x + camera.x < size)
+				color = get_color_for_tile(tile);
 			fill_tile(mlx, r.x * 16 + r.y * ((tile_num * 16) * 16),
 				color, tile_num);
 			r.x++;

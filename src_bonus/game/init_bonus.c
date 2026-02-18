@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccouton <ccouton@42angouleme.fr>          +#+  +:+       +#+         */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 11:23:48 by ccouton         #+#    #+#               */
-/*   Updated: 2026/02/15 00:00:00 by ccouton        ###   ########.fr         */
+/*   Created: 2026/01/23 11:23:48 by ccouton           #+#    #+#             */
+/*   Updated: 2026/02/18 12:22:11 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,12 @@ void	init_map(t_mlx *mlx, t_parsing_infos *parsing)
 	init_doors(mlx);
 	if (!mlx->map.map)
 		return ;
+}
+
+void	init_datas(t_mlx *mlx, t_parsing_infos *parsing_i)
+{
+	mlx->window_draw_size = mlx->window_size;
+	init_map(mlx, parsing_i);
+	init_player(mlx, parsing_i);
+	init_editor(mlx);
 }

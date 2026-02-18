@@ -8,6 +8,7 @@ PARSING_DIR	:= parsing/
 TEXTURE_DIR := textures/
 GAME_DIR	:= game/
 EVENT_DIR	:= event/
+EDITOR_DIR	:= editor/
 
 BUILD_DIR 		:= build/
 BUILD_DIR_BONUS	:= build_bonus/
@@ -33,6 +34,8 @@ SRCS := main.c \
 		$(VEC2_DIR)vec_convert.c \
 
 SRCS_BONUS := main_bonus.c \
+			  $(EDITOR_DIR)editor_bonus.c \
+			  $(EDITOR_DIR)editor_utils_bonus.c \
 			  $(EVENT_DIR)event_bonus.c \
 			  $(GAME_DIR)ceiling_floor_bonus.c \
 			  $(GAME_DIR)free_game_bonus.c \
@@ -105,6 +108,7 @@ header_bonus:
 	@echo "\033[0m \033[38;5;178m"
 	@echo "\n - Move with WASD"
 	@echo " - Open and close door with E"
+	@echo " - Open the editor with TAB"
 	@echo " - Exit with ESC"
 	@echo "\n - Made by ntome and ccouton\n"
 	@echo "\033[38;5;51m"

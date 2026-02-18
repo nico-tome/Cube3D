@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_game_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 14:31:19 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/10 00:21:07 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/18 15:37:03 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	free_game(t_mlx *mlx)
 void	free_mlx(t_mlx *mlx)
 {
 	free_game(mlx);
+	free(mlx->editor.part);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_context(mlx->mlx);
 }

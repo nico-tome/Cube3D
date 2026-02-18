@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 14:50:41 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/16 17:28:13 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/18 12:22:40 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void	init_ray(t_mlx *mlx, t_ray *ray, int x)
 {
-	ray->camera_x = 2 * x / (double)(mlx->window_size.x) - 1;
+	ray->camera_x = 2 * x / (double)(mlx->window_draw_size.x) - 1;
 	ray->ray_dir.x = mlx->player.rot.x + mlx->player.plane.x * ray->camera_x;
 	ray->ray_dir.y = mlx->player.rot.y + mlx->player.plane.y * ray->camera_x;
 	ray->map_pos = dvec2_to_vec2(mlx->player.pos);
@@ -60,13 +60,13 @@ void	dda(t_mlx *mlx, t_ray *ray)
 
 void	init_draw(t_mlx *mlx, t_drawing *draw, t_ray *ray)
 {
-	draw->line_height = (int)(mlx->window_size.y / ray->perp_wall_dist);
-	draw->draw_start = -draw->line_height / 2 + mlx->window_size.y / 2;
+	draw->line_height = (int)(mlx->window_draw_size.y / ray->perp_wall_dist);
+	draw->draw_start = -draw->line_height / 2 + mlx->window_draw_size.y / 2;
 	if (draw->draw_start < 0)
 		draw->draw_start = 0;
-	draw->draw_end = draw->line_height / 2 + mlx->window_size.y / 2;
-	if (draw->draw_end >= mlx->window_size.y)
-		draw->draw_end = mlx->window_size.y - 1;
+	draw->draw_end = draw->line_height / 2 + mlx->window_draw_size.y / 2;
+	if (draw->draw_end >= mlx->window_draw_size.y)
+		draw->draw_end = mlx->window_draw_size.y - 1;
 	if (ray->side == 1)
 	{
 		draw->wall_x = mlx->player.pos.x + ray->perp_wall_dist * ray->ray_dir.x;
@@ -94,7 +94,7 @@ void	setup_line(t_mlx *mlx, t_drawing *draw, t_ray *ray, int x)
 	i = 0;
 	while (i < draw->draw_start)
 	{
-		mlx->draw_line[x + mlx->window_size.x * i] = get_ceiling(mlx, x, i);
+		mlx->draw_line[x + mlx->window_draw_size.x * i] = get_ceiling(mlx, x, i);
 		i++;
 	}
 	draw->tex.x = (int)(draw->wall_x * (double)draw->texture.texture_width);
@@ -105,12 +105,12 @@ void	setup_line(t_mlx *mlx, t_drawing *draw, t_ray *ray, int x)
 	{
 		draw->tex.y = (int)draw->tex_pos & (draw->texture.texture_height - 1);
 		draw->tex_pos += draw->step;
-		mlx->draw_line[x + mlx->window_size.x * i] = get_tex_color(mlx, draw);
+		mlx->draw_line[x + mlx->window_draw_size.x * i] = get_tex_color(mlx, draw);
 		i++;
 	}
-	while (i < mlx->window_size.y)
+	while (i < mlx->window_draw_size.y)
 	{
-		mlx->draw_line[x + mlx->window_size.x * i] = get_floor(mlx, x, i);
+		mlx->draw_line[x + mlx->window_draw_size.x * i] = get_floor(mlx, x, i);
 		i++;
 	}
 }
@@ -122,7 +122,7 @@ void	raycasting(t_mlx *mlx)
 	t_drawing	draw;
 
 	i = 0;
-	while (i < mlx->window_size.x)
+	while (i < mlx->window_draw_size.x)
 	{
 		init_ray(mlx, &ray, i);
 		dda(mlx, &ray);
@@ -134,6 +134,6 @@ void	raycasting(t_mlx *mlx)
 		setup_line(mlx, &draw, &ray, i);
 		i++;
 	}
-	mlx_pixel_put_region(mlx->mlx, mlx->win, 0, 0, mlx->window_size.x,
-		mlx->window_size.y, mlx->draw_line);
+	mlx_pixel_put_region(mlx->mlx, mlx->win, 0, 0, mlx->window_draw_size.x,
+		mlx->window_draw_size.y, mlx->draw_line);
 }

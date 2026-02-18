@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:19:31 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/16 17:31:20 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/18 15:41:01 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,20 @@ void	init_event(t_mlx *mlx)
 	mlx_on_event(mlx->mlx, mlx->win, MLX_MOUSEDOWN, mouse_hook, mlx);
 }
 
+void	handle_mouse_editor(t_mlx *mlx)
+{
+	mlx_mouse_get_pos(mlx->mlx, &mlx->mouse.x, &mlx->mouse.y);
+	mlx->editor.focus = 0;
+	if (mlx->mouse.y < mlx->window_size.y / 2)
+		mlx_mouse_hide(mlx->mlx);
+	else
+	{
+		mlx->editor.focus = 1;
+		mlx_mouse_show(mlx->mlx);
+		set_vec2(&mlx->old_mouse, mlx->window_size.x / 2, 0);
+	}
+}
+
 void	loop(void *params)
 {
 	char	*fps;
@@ -50,13 +64,23 @@ void	loop(void *params)
 	mlx->old_time = mlx->time;
 	mlx->time = ft_get_time();
 	fps = ft_itoa(1 / ((mlx->time - mlx->old_time) / 1000));
-	move_player(mlx);
+	if (mlx->page == GAME)
+		mlx_mouse_hide(mlx->mlx);
+	else
+		handle_mouse_editor(mlx);
+	if (!mlx->editor.focus)
+		move_player(mlx);
+	else
+		move_editor_camera(mlx);
 	mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){.rgba = 0x00FF00FF});
 	raycasting(mlx);
-	draw_minimap(mlx);
+	if (mlx->page == GAME)
+		draw_minimap(mlx);
 	mlx_string_put(mlx->mlx, mlx->win, mlx->window_size.x - 100, 50,
 		(mlx_color){.rgba = COLOR_RED}, fps);
 	free(fps);
+	if (mlx->page == EDITOR)
+		draw_editor(mlx);
 }
 
 void	init_app(t_parsing_infos *parsing_i)
@@ -71,8 +95,9 @@ void	init_app(t_parsing_infos *parsing_i)
 	mlx.map = parsing_i->map;
 	mlx.keys[255] = 1;
 	mlx.time = ft_get_time();
+	mlx.page = GAME;
 	set_vec2(&mlx.window_size, 1280, 720);
-	init_map(&mlx, parsing_i);
+	init_datas(&mlx, parsing_i);
 	if (!init_textures(&mlx, parsing_i))
 	{
 		printf("Error\nA texture path do not link a texture file.\n");
@@ -80,7 +105,6 @@ void	init_app(t_parsing_infos *parsing_i)
 		free_parsing(parsing_i);
 		return ;
 	}
-	init_player(&mlx, parsing_i);
 	init_event(&mlx);
 	mlx_add_loop_hook(mlx.mlx, loop, &mlx);
 	mlx_loop(mlx.mlx);

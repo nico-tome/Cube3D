@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 11:20:55 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/09 12:36:12 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/18 12:19:19 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ double	get_tex_pos(t_mlx *mlx, t_drawing *draw)
 {
 	double	result;
 
-	result = draw->draw_start - mlx->window_size.y / 2 + draw->line_height / 2;
+	result = draw->draw_start - mlx->window_draw_size.y / 2 + draw->line_height / 2;
 	result *= draw->step;
 	return (result);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 10:29:14 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/09 12:35:59 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/18 11:48:37 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,14 @@ static	void	update_plane(t_mlx *mlx)
 	old_d = mlx->player.rot;
 	old_p = mlx->player.plane;
 	rot_s = ROT_SPEED * (mlx->keys[KEY_RIGHT] - mlx->keys[KEY_LEFT]);
+	if ((rot_s == 0 && mlx->page == GAME)
+		|| (mlx->page == EDITOR && mlx->mouse.y < mlx->window_size.y / 2))
+	{
+		mlx_mouse_get_pos(mlx->mlx, &mlx->mouse.x, &mlx->mouse.y);
+		rot_s = ROT_SPEED * ((mlx->mouse.x - mlx->old_mouse.x) * 0.07);
+		mlx_mouse_move(mlx->mlx, mlx->win, mlx->window_size.x / 2, mlx->mouse.y);
+		mlx_mouse_get_pos(mlx->mlx, &mlx->old_mouse.x, &mlx->old_mouse.y);
+	}
 	mlx->player.rot.x = rot.x * cos(rot_s) - rot.y * sin(rot_s);
 	mlx->player.rot.y = old_d.x * sin(rot_s) + rot.y * cos(rot_s);
 	mlx->player.plane.x = plane.x * cos(rot_s) - plane.y * sin(rot_s);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_free_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:35:36 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/09 14:59:20 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/18 11:17:48 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	free_map(t_parsing_infos *parsing_i)
 
 void	free_parsing(t_parsing_infos *parsing_i)
 {
-	free_paths(parsing_i);
 	free_raw_datas(parsing_i);
+	free_paths(parsing_i);
 	free_map(parsing_i);
 	if (parsing_i->fd > 0)
 		close(parsing_i->fd);
