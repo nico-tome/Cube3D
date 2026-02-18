@@ -51,6 +51,10 @@ int	is_in_map(t_mlx *mlx, t_vec2 pos)
 {
 	t_vec2	real_pos;
 
+	if (!(mlx->mouse.x > 6 && mlx->mouse.x < 32 * 30 + 6
+		&& mlx->mouse.y > mlx->window_size.y / 2 + 3
+		&& mlx->mouse.y < mlx->window_size.y - 6))
+		return (0);
 	real_pos.x = pos.x + mlx->editor.camera.x;
 	real_pos.y = pos.y + mlx->editor.camera.y;
 	if (real_pos.x < (int)ft_strlen(mlx->map.map[real_pos.y]))
@@ -67,8 +71,22 @@ void	editor_mouse_click(t_mlx *mlx)
 	mouse_tile.y = (mlx->mouse.y - ((mlx->window_size.y / 2) + 3)) / 32;
 	if (is_in_map(mlx, mouse_tile))
 	{
+		mouse_tile =  vec2_add(mouse_tile, mlx->editor.camera);
 		tile = mlx->map.map[mouse_tile.y][mouse_tile.x];
 		if (tile != mlx->editor.brush)
 			mlx->map.map[mouse_tile.y][mouse_tile.x] = mlx->editor.brush;
 	}
+	else if (mlx->editor.brush_hover != '\0')
+		mlx->editor.brush = mlx->editor.brush_hover;
+}
+
+void	print_help_editor(t_mlx *mlx)
+{
+	editor_fill_tile(mlx, (t_vec2){.x = 38, .y = 1}, get_color("64,64,64"));
+	editor_fill_tile(mlx, (t_vec2){.x = 36, .y = 1}, get_color("192,192,192"));
+	editor_fill_tile(mlx, (t_vec2){.x = 38, .y = 3}, get_color("153,0,0"));
+	editor_fill_tile(mlx, (t_vec2){.x = 36, .y = 3}, get_color("153,76,0"));
+	editor_fill_tile(mlx, (t_vec2){.x = 34, .y = 3}, get_color("153,153,0"));
+	editor_fill_tile(mlx, (t_vec2){.x = 32, .y = 3}, get_color("0,153,76"));
+	editor_fill_tile(mlx, (t_vec2){.x = 38, .y = 5}, get_color("0,255,0"));
 }

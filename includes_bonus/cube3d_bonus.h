@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:22:41 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/18 17:22:26 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/18 21:05:49 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_editor
 	t_vec2		camera;
 	t_vec2		tile_selected;
 	char		brush;
+	char		brush_hover;
 	int			broken;
 	int			spawn;
 	int			focus;
@@ -135,5 +136,8 @@ void		move_editor_camera(t_mlx *mlx);
 mlx_color	get_color_for_tile(char tile);
 int			is_in_map(t_mlx *mlx, t_vec2 pos);
 void		editor_mouse_click(t_mlx *mlx);
+void		editor_fill_tile(t_mlx *mlx, t_vec2 pos, mlx_color color);
+void		print_help_editor(t_mlx *mlx);
+int			is_a_panel_button(t_mlx *mlx, t_vec2 tile);
 
 #endif

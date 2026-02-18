@@ -35,6 +35,7 @@ SRCS := main.c \
 
 SRCS_BONUS := main_bonus.c \
 			  $(EDITOR_DIR)editor_bonus.c \
+			  $(EDITOR_DIR)editor_panel_bonus.c \
 			  $(EDITOR_DIR)editor_utils_bonus.c \
 			  $(EVENT_DIR)event_bonus.c \
 			  $(GAME_DIR)ceiling_floor_bonus.c \

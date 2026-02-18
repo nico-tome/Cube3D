@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 11:51:06 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/18 17:16:39 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/18 21:17:13 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init_editor(t_mlx *mlx)
 	init_color_list(mlx->window_size.x * ((mlx->window_size.y / 2) + 1),
 		&(mlx->editor.part), "0,0,0");
 	mlx->editor.brush = '1';
+	mlx->editor.brush_hover = '\0';
 	mlx->editor.spawn = 1;
 	mlx->editor.broken = 0;
 	mlx->editor.camera = (t_vec2){.x = 0, .y = 0};
@@ -61,6 +62,7 @@ void	draw_map(t_mlx *mlx)
 	t_vec2	pos;
 	char	tile;
 
+	read.y = 0;
 	while (read.y < 11)
 	{
 		read.x = 0;
@@ -91,12 +93,32 @@ void	draw_cursor(t_mlx *mlx)
 		if (is_in_map(mlx, mouse_tile))
 			editor_fill_tile(mlx, mouse_tile, get_color("204,153,255"));
 	}
+	else
+	{
+		mouse_tile.x = (mlx->mouse.x - 6) / 32;
+		mouse_tile.y = (mlx->mouse.y - ((mlx->window_size.y / 2) + 3)) / 32;
+		is_a_panel_button(mlx, mouse_tile);
+	}
 }
 
 void	draw_editor(t_mlx *mlx)
 {
+	char	*txt;
+	char	tmp[2];
+
 	draw_map(mlx);
+	print_help_editor(mlx);
 	draw_cursor(mlx);
+	tmp[0] = mlx->editor.brush_hover;
+	tmp[1] = '\0';
+	txt = ft_strjoin("Brush hover: ", tmp);
 	mlx_pixel_put_region(mlx->mlx, mlx->win, 0, (mlx->window_size.y / 2) - 1,
 		mlx->window_size.x, (mlx->window_size.y / 2) + 1, mlx->editor.part);
+	mlx_string_put(mlx->mlx, mlx->win, mlx->window_size.x - 250,
+		mlx->window_size.y - 50, (mlx_color){.rgba = 0x00FF00FF}, txt);
+	free(txt);
+	tmp[0] = mlx->editor.brush;
+	txt = ft_strjoin("Brush selected: ", tmp);
+	mlx_string_put(mlx->mlx, mlx->win, mlx->window_size.x - 250,
+		mlx->window_size.y - 30, (mlx_color){.rgba = 0x00FF00FF}, txt);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 00:00:00 by ccouton           #+#    #+#             */
-/*   Updated: 2026/02/18 17:02:50 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/18 18:05:54 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	fill_buffer(t_mlx *mlx, t_vec2 camera, int tile_num)
 		while (r.x < tile_num)
 		{
 			size = (int)ft_strlen(mlx->map.map[r.y + camera.y]);
-			tile = mlx->map.map[r.y + camera.y][r.x + camera.x];
+			tile = mlx->map.map[r.y + camera.y][(r.x + camera.x) % size];
 			if (r.y + camera.y == (int)pos.y && r.x + camera.x == (int)pos.x)
 				color.rgba = 0xFF0000FF;
 			else if (r.x + camera.x < size)
