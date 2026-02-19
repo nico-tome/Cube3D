@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:19:31 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/18 20:25:47 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/19 16:18:06 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,6 @@
 #include "texture_bonus.h"
 #include <stdlib.h>
 #include <unistd.h>
-
-long long	ft_get_time(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return (time.tv_usec / 1000 + time.tv_sec * 1000);
-}
 
 void	init_event(t_mlx *mlx)
 {
@@ -73,7 +65,8 @@ void	loop(void *params)
 	else
 		move_editor_camera(mlx);
 	mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){.rgba = 0x00FF00FF});
-	raycasting(mlx);
+	if (!mlx->editor.broken)
+		raycasting(mlx);
 	if (mlx->page == GAME)
 		draw_minimap(mlx);
 	mlx_string_put(mlx->mlx, mlx->win, mlx->window_size.x - 100, 50,
@@ -83,7 +76,7 @@ void	loop(void *params)
 		draw_editor(mlx);
 }
 
-void	init_app(t_parsing_infos *parsing_i)
+void	init_app(t_parsing_infos *parsing_i, char *path)
 {
 	t_mlx					mlx;
 	mlx_window_create_info	infos;
@@ -93,7 +86,7 @@ void	init_app(t_parsing_infos *parsing_i)
 	infos.title = "Cube3D";
 	mlx.win = mlx_new_window(mlx.mlx, &infos);
 	mlx.map = parsing_i->map;
-	mlx.keys[255] = 1;
+	mlx.file_path = path;
 	mlx.time = ft_get_time();
 	mlx.page = GAME;
 	set_vec2(&mlx.window_size, 1280, 720);
@@ -127,5 +120,5 @@ int	main(int ac, char **av)
 		free_parsing(&parsing_i);
 		exit(EXIT_FAILURE);
 	}
-	init_app(&parsing_i);
+	init_app(&parsing_i, av[1]);
 }

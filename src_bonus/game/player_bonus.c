@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 10:29:14 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/18 11:48:37 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/19 16:35:42 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ static void	try_move(t_mlx *mlx, double dx, double dy)
 	i = 0;
 	while (i < mlx->door_count)
 	{
-		if (mlx->doors[i].x == (int)new_x && mlx->doors[i].y == (int)new_y
-			&& mlx->doors[i].open == 0)
+		if (mlx->doors[i].pos.x == (int)new_x
+			&& mlx->doors[i].pos.y == (int)new_y
+			&& mlx->doors[i].open == 0 && !mlx->doors[i].disabled)
 			is_door_blocked = 1;
 		i++;
 	}
@@ -52,11 +53,13 @@ static	void	update_plane(t_mlx *mlx)
 	old_p = mlx->player.plane;
 	rot_s = ROT_SPEED * (mlx->keys[KEY_RIGHT] - mlx->keys[KEY_LEFT]);
 	if ((rot_s == 0 && mlx->page == GAME)
-		|| (mlx->page == EDITOR && mlx->mouse.y < mlx->window_size.y / 2))
+		|| (mlx->page == EDITOR && mlx->mouse.y < mlx->window_size.y / 2
+			&& rot_s == 0))
 	{
 		mlx_mouse_get_pos(mlx->mlx, &mlx->mouse.x, &mlx->mouse.y);
 		rot_s = ROT_SPEED * ((mlx->mouse.x - mlx->old_mouse.x) * 0.07);
-		mlx_mouse_move(mlx->mlx, mlx->win, mlx->window_size.x / 2, mlx->mouse.y);
+		mlx_mouse_move(mlx->mlx, mlx->win,
+			mlx->window_size.x / 2, mlx->mouse.y);
 		mlx_mouse_get_pos(mlx->mlx, &mlx->old_mouse.x, &mlx->old_mouse.y);
 	}
 	mlx->player.rot.x = rot.x * cos(rot_s) - rot.y * sin(rot_s);

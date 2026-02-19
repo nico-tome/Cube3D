@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 15:06:59 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/18 12:24:48 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/19 10:54:26 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,12 @@ mlx_color	get_floor(t_mlx *mlx, int x, int y)
 	ray_dir1.y = mlx->player.rot.y - mlx->player.plane.y;
 	ray_dir2.x = mlx->player.rot.x + mlx->player.plane.x;
 	ray_dir2.y = mlx->player.rot.y + mlx->player.plane.y;
-	row_distance = (0.5 * mlx->window_draw_size.y) / (y - mlx->window_draw_size.y / 2);
-	floor_s.x = row_distance * (ray_dir2.x - ray_dir1.x) / mlx->window_draw_size.x;
-	floor_s.y = row_distance * (ray_dir2.y - ray_dir1.y) / mlx->window_draw_size.x;
+	row_distance = (0.5 * mlx->window_draw_size.y)
+		/ (y - mlx->window_draw_size.y / 2);
+	floor_s.x = row_distance * (ray_dir2.x - ray_dir1.x)
+		/ mlx->window_draw_size.x;
+	floor_s.y = row_distance * (ray_dir2.y - ray_dir1.y)
+		/ mlx->window_draw_size.x;
 	floor.x = mlx->player.pos.x + row_distance * ray_dir1.x;
 	floor.y = mlx->player.pos.y + row_distance * ray_dir1.y;
 	floor.x += floor_s.x * x;

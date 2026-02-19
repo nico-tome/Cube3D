@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 15:01:08 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/10 00:15:20 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/19 16:42:06 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	init_textures(t_mlx *mlx, t_parsing_infos *parsing)
 			parsing->we_path, &mlx->textures.we_wall.texture_width,
 			&mlx->textures.we_wall.texture_height);
 	if (!mlx->textures.ea_wall.texture || !mlx->textures.no_wall.texture
-		|| !mlx->textures.so_wall.texture || !mlx->textures.we_wall.texture)
+		|| !mlx->textures.so_wall.texture || !mlx->textures.we_wall.texture
+		|| !mlx->textures.floor.texture || !mlx->textures.ceiling.texture)
 		return (0);
 	return (1);
 }

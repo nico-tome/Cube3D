@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:35:48 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/09 16:20:25 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/19 16:54:31 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,13 @@ int	check_map(char **map)
 		line++;
 	}
 	if (!has_spawn)
-	{
 		printf("Error\nNo spawn in the map.\n");
+	if (!has_spawn)
 		return (0);
-	}
+	if (!check_doors(map))
+		printf("Error\nToo many doors.\n");
+	if (!check_doors(map))
+		return (0);
 	return (check_close(map));
 }
 

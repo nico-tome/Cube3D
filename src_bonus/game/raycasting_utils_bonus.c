@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 11:20:55 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/18 12:19:19 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/19 13:53:31 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ double	get_tex_pos(t_mlx *mlx, t_drawing *draw)
 {
 	double	result;
 
-	result = draw->draw_start - mlx->window_draw_size.y / 2 + draw->line_height / 2;
+	result = draw->draw_start - mlx->window_draw_size.y / 2
+		+ draw->line_height / 2;
 	result *= draw->step;
 	return (result);
 }
@@ -76,9 +77,9 @@ int	is_door_hit(t_mlx *mlx, t_ray *ray)
 	i = 0;
 	while (i < mlx->door_count)
 	{
-		if (mlx->doors[i].x == ray->map_pos.x
-			&& mlx->doors[i].y == ray->map_pos.y
-			&& mlx->doors[i].open == 0)
+		if (mlx->doors[i].pos.x == ray->map_pos.x
+			&& mlx->doors[i].pos.y == ray->map_pos.y
+			&& mlx->doors[i].open == 0 && !mlx->doors[i].disabled)
 			return (1);
 		i++;
 	}

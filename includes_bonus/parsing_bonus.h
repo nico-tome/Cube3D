@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:57:54 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/10 00:30:41 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/19 14:52:20 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void	load_map(t_parsing_infos *parsing_i, int line);
 int		check_datas(t_parsing_infos *parsing_i);
 int		check_close(char **map);
 void	free_parsing(t_parsing_infos *parsing_i);
+int		check_doors(char **map);
 
 #endif

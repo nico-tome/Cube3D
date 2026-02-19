@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 14:10:11 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/18 21:19:39 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/19 16:32:38 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	key_hook(int key, void *param)
 		mlx_loop_end(mlx->mlx);
 	if (key == KEY_E)
 		toggle_door(mlx);
+	if (key == KEY_X && mlx->page == EDITOR)
+		save_map(mlx);
 	if (key == KEY_TAB)
 	{
 		mlx->window_draw_size = mlx->window_size;

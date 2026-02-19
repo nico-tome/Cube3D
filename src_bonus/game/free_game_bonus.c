@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 14:31:19 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/18 15:37:03 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/19 15:23:22 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,27 @@ void	free_game(t_mlx *mlx)
 	free(mlx->draw_line);
 }
 
+void	free_game_infos(t_mlx *mlx)
+{
+	if (mlx->game_infos.ceiling)
+		free(mlx->game_infos.ceiling);
+	if (mlx->game_infos.floor)
+		free(mlx->game_infos.floor);
+	if (mlx->game_infos.no)
+		free(mlx->game_infos.no);
+	if (mlx->game_infos.so)
+		free(mlx->game_infos.so);
+	if (mlx->game_infos.we)
+		free(mlx->game_infos.we);
+	if (mlx->game_infos.ea)
+		free(mlx->game_infos.ea);
+}
+
 void	free_mlx(t_mlx *mlx)
 {
 	free_game(mlx);
 	free(mlx->editor.part);
+	free_game_infos(mlx);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_context(mlx->mlx);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 11:51:06 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/18 21:17:13 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/19 16:13:50 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	init_editor(t_mlx *mlx)
 	mlx->editor.spawn = 1;
 	mlx->editor.broken = 0;
 	mlx->editor.camera = (t_vec2){.x = 0, .y = 0};
+	mlx->editor.focus = 0;
 }
 
 void	editor_fill_tile(t_mlx *mlx, t_vec2 pos, mlx_color color)
@@ -121,4 +122,5 @@ void	draw_editor(t_mlx *mlx)
 	txt = ft_strjoin("Brush selected: ", tmp);
 	mlx_string_put(mlx->mlx, mlx->win, mlx->window_size.x - 250,
 		mlx->window_size.y - 30, (mlx_color){.rgba = 0x00FF00FF}, txt);
+	animate_sprite(mlx);
 }

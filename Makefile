@@ -34,7 +34,9 @@ SRCS := main.c \
 		$(VEC2_DIR)vec_convert.c \
 
 SRCS_BONUS := main_bonus.c \
+			  time_bonus.c \
 			  $(EDITOR_DIR)editor_bonus.c \
+			  $(EDITOR_DIR)editor_evaluation_bonus.c \
 			  $(EDITOR_DIR)editor_panel_bonus.c \
 			  $(EDITOR_DIR)editor_utils_bonus.c \
 			  $(EVENT_DIR)event_bonus.c \
@@ -110,6 +112,8 @@ header_bonus:
 	@echo "\n - Move with WASD"
 	@echo " - Open and close door with E"
 	@echo " - Open the editor with TAB"
+	@echo " - Change brush with the colored squares in the editor"
+	@echo " - Save map with X"
 	@echo " - Exit with ESC"
 	@echo "\n - Made by ntome and ccouton\n"
 	@echo "\033[38;5;51m"

@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 14:50:41 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/18 12:22:40 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/19 10:56:46 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ void	setup_line(t_mlx *mlx, t_drawing *draw, t_ray *ray, int x)
 	i = 0;
 	while (i < draw->draw_start)
 	{
-		mlx->draw_line[x + mlx->window_draw_size.x * i] = get_ceiling(mlx, x, i);
+		mlx->draw_line[x + mlx->window_draw_size.x
+			* i] = get_ceiling(mlx, x, i);
 		i++;
 	}
 	draw->tex.x = (int)(draw->wall_x * (double)draw->texture.texture_width);
@@ -105,14 +106,13 @@ void	setup_line(t_mlx *mlx, t_drawing *draw, t_ray *ray, int x)
 	{
 		draw->tex.y = (int)draw->tex_pos & (draw->texture.texture_height - 1);
 		draw->tex_pos += draw->step;
-		mlx->draw_line[x + mlx->window_draw_size.x * i] = get_tex_color(mlx, draw);
+		mlx->draw_line[x + mlx->window_draw_size.x * i]
+			= get_tex_color(mlx, draw);
 		i++;
 	}
-	while (i < mlx->window_draw_size.y)
-	{
+	i--;
+	while (++i < mlx->window_draw_size.y)
 		mlx->draw_line[x + mlx->window_draw_size.x * i] = get_floor(mlx, x, i);
-		i++;
-	}
 }
 
 void	raycasting(t_mlx *mlx)

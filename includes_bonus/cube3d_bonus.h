@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:22:41 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/18 21:05:49 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/19 16:36:09 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define COLOR_GREEN	0x00FF00FF
 # define SPEED 0.2
 # define ROT_SPEED 0.05
-# define MAX_DOORS 64
+# define MAX_DOORS 12
 
 typedef enum e_page
 {
@@ -42,9 +42,9 @@ typedef enum e_page
 
 typedef struct s_door
 {
-	int	x;
-	int	y;
-	int	open;
+	t_vec2	pos;
+	int		open;
+	int		disabled;
 }	t_door;
 
 typedef struct s_game_infos
@@ -54,6 +54,8 @@ typedef struct s_game_infos
 	char		*so;
 	char		*we;
 	char		*ea;
+	char		*floor;
+	char		*ceiling;
 }				t_game_infos;
 
 typedef struct s_player
@@ -105,6 +107,7 @@ typedef struct s_mlx
 	double			old_time;
 	int				keys[256];
 	t_door			doors[MAX_DOORS];
+	char			*file_path;
 	int				door_count;
 	t_vec2			old_mouse;
 	t_vec2			mouse;
@@ -139,5 +142,9 @@ void		editor_mouse_click(t_mlx *mlx);
 void		editor_fill_tile(t_mlx *mlx, t_vec2 pos, mlx_color color);
 void		print_help_editor(t_mlx *mlx);
 int			is_a_panel_button(t_mlx *mlx, t_vec2 tile);
+void		evaluate_changement(t_mlx *mlx, char tile, char old_tile);
+long long	ft_get_time(void);
+void		save_map(t_mlx *mlx);
+void		animate_sprite(t_mlx *mlx);
 
 #endif
