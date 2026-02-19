@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:42:36 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/19 16:43:38 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/19 22:59:59 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,15 @@ int	need_to_check(char c)
 
 int	check(char **map, t_vec2 reader)
 {
-	int	line_len;
-
-	line_len = ft_strlen(map[reader.y]);
 	if (reader.x == 0 || reader.y == 0)
+		return (0);
+	if (!map[reader.y + 1][reader.x])
+		return (0);
+	if (!map[reader.y - 1][reader.x])
+		return (0);
+	if (!map[reader.y][reader.x + 1])
+		return (0);
+	if (!map[reader.y][reader.x - 1])
 		return (0);
 	if (map[reader.y][reader.x + 1] == ' ')
 		return (0);
@@ -45,8 +50,6 @@ int	check(char **map, t_vec2 reader)
 	if (map[reader.y - 1][reader.x] == ' ')
 		return (0);
 	if (map[reader.y][reader.x - 1] == ' ')
-		return (0);
-	if (!map[reader.y + 1][reader.x])
 		return (0);
 	return (1);
 }

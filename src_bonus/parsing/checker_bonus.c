@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:35:48 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/19 16:54:31 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/19 22:43:58 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,11 @@ int	check_datas(t_parsing_infos *parsing_i)
 {
 	int	extension_len;
 
+	if (!parsing_i->file_extension)
+	{
+		printf("Error\nNo file extension found.\n");
+		return (0);
+	}
 	extension_len = ft_strlen(parsing_i->file_extension);
 	if (!parsing_i->file_extension
 		|| ft_strncmp(parsing_i->file_extension, ".cub", extension_len))

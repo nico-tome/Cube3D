@@ -1,8 +1,8 @@
-NO ./assets/Animal_02-256x256.png
-SO ./assets/Wall_05-128x128.png
+NO ./assets/brickwall.png
+SO ./assets/brickwall01.png
 
 WE ./src/main.c
-EA ./assets/Ground_08-128x128.png
+EA ./assets/brickwall04.png
 
 
 F 225,100,9
