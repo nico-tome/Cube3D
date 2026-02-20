@@ -5,8 +5,8 @@ WE ./assets/brickwall03.png
 EA ./assets/brickwall04.png
 
 
-F ./assets/stone01.png
-C ./assets/diamondore.png
+F 225,100,9
+C 56,15,120
 
 
 111111111111111111111111111111111111111

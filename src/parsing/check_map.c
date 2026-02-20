@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:42:36 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/19 22:30:38 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/20 09:20:41 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ int	check(char **map, t_vec2 reader)
 {
 	if (reader.x == 0 || reader.y == 0)
 		return (0);
+	if ((int)ft_strlen(map[reader.y + 1]) <= reader.x)
+		return (0);
+	if (!map[reader.y + 1][reader.x])
+		return (0);
+	if (!map[reader.y - 1][reader.x])
+		return (0);
+	if (!map[reader.y][reader.x + 1])
+		return (0);
+	if (!map[reader.y][reader.x - 1])
+		return (0);
 	if (map[reader.y][reader.x + 1] == ' ')
 		return (0);
 	if (!map[reader.y + 1] || !map[reader.y][reader.x + 1])
@@ -41,10 +51,6 @@ int	check(char **map, t_vec2 reader)
 	if (map[reader.y - 1][reader.x] == ' ')
 		return (0);
 	if (map[reader.y][reader.x - 1] == ' ')
-		return (0);
-	if (!map[reader.y + 1][reader.x])
-		return (0);
-	if (!map[reader.y - 1][reader.x])
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 10:58:03 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/19 16:31:33 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/20 09:28:25 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	save_map(t_mlx *mlx)
 			i++;
 		}
 		close(fd);
+		printf("Map saved successfully at %s!\n", mlx->file_path);
 	}
 }
 
