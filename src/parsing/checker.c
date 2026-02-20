@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:35:48 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/19 22:29:37 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/20 20:10:16 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	check_map(char **map)
 
 	has_spawn = 0;
 	line = 0;
-	while (map[line])
+	while (map && map[line])
 	{
 		if (map[line][0] == '\n')
 		{

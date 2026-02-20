@@ -1,5 +1,5 @@
-NAME 		:= cube3D
-NAME_BONUS	:= cube3D_bonus
+NAME 		:= cub3D
+NAME_BONUS	:= cub3D_bonus
 
 SRC_DIR 	:= src/
 SRC_BONUS_DIR	:= src_bonus/

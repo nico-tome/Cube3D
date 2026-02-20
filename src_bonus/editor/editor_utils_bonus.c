@@ -51,6 +51,8 @@ int	is_in_map(t_mlx *mlx, t_vec2 pos)
 {
 	t_vec2	real_pos;
 
+	if (pos.y >= mlx->map.size)
+		return (0);
 	if (!(mlx->mouse.x > 6 && mlx->mouse.x < 32 * 30 + 6
 			&& mlx->mouse.y > mlx->window_size.y / 2 + 3
 			&& mlx->mouse.y < mlx->window_size.y - 6))

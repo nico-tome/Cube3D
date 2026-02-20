@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:42:36 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/20 09:35:14 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/20 13:49:22 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_close(char **map)
 	t_vec2	reader;
 
 	reader.y = 0;
-	while (map[reader.y])
+	while (map && map[reader.y])
 	{
 		reader.x = 0;
 		while (map[reader.y][reader.x])

@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:22:41 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/19 16:36:09 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/20 20:09:57 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,6 @@ void		evaluate_changement(t_mlx *mlx, char tile, char old_tile);
 long long	ft_get_time(void);
 void		save_map(t_mlx *mlx);
 void		animate_sprite(t_mlx *mlx);
+void		init_minimap(t_mlx *mlx);
 
 #endif

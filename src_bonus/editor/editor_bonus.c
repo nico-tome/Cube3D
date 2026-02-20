@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 11:51:06 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/19 16:13:50 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/20 19:39:57 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	draw_map(t_mlx *mlx)
 	char	tile;
 
 	read.y = 0;
-	while (read.y < 11)
+	while (read.y < 11 && read.y < mlx->map.size)
 	{
 		read.x = 0;
 		while (read.x < 30)

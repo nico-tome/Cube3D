@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 00:00:00 by ccouton           #+#    #+#             */
-/*   Updated: 2026/02/18 18:05:54 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/20 20:05:19 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	fill_buffer(t_mlx *mlx, t_vec2 camera, int tile_num)
 
 	r.y = 0;
 	pos = dvec2_to_vec2(mlx->player.pos);
-	while (r.y < tile_num)
+	while (r.y < tile_num && r.y < mlx->map.size)
 	{
 		r.x = 0;
 		while (r.x < tile_num)
@@ -87,6 +87,7 @@ void	draw_minimap(t_mlx *mlx)
 
 	tile_num = 17;
 	len = ft_strlen(mlx->map.map[(int)mlx->player.pos.y]);
+	init_minimap(mlx);
 	if (mlx->player.pos.x < tile_num / 2)
 		camera_pos.x = 0;
 	else if (mlx->player.pos.x >= len - tile_num / 2)

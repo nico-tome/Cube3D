@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 10:58:03 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/20 09:30:24 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/20 20:12:22 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,16 @@ void	animate_sprite(t_mlx *mlx)
 	else
 		mlx_put_transformed_image_to_window(mlx->mlx, mlx->win,
 			mlx->textures.we_wall.texture, 15, 15, 2.0f, 2.0f, 0);
+}
+
+void	init_minimap(t_mlx *mlx)
+{
+	int	i;
+
+	i = 0;
+	while (i < 73984)
+	{
+		mlx->minimap[i].rgba = 0x00FF55FF;
+		i++;
+	}
 }

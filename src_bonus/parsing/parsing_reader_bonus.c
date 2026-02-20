@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_reader_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 19:26:55 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/09 15:00:58 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/20 19:52:11 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing_bonus.h"
+
+int	is_duplicate(t_parsing_infos *parsing_i, const char *key)
+{
+	if (!key || !key[0])
+		return (0);
+	if (!ft_strncmp(key, "NO", 2) && parsing_i->no_path != NULL)
+		return (0);
+	else if (!ft_strncmp(key, "SO", 2) && parsing_i->so_path != NULL)
+		return (0);
+	else if (!ft_strncmp(key, "EA", 2) && parsing_i->ea_path != NULL)
+		return (0);
+	else if (!ft_strncmp(key, "WE", 2) && parsing_i->we_path != NULL)
+		return (0);
+	else if (!ft_strncmp(key, "C", 1) && parsing_i->ceiling_color != NULL)
+		return (0);
+	else if (!ft_strncmp(key, "F", 1) && parsing_i->floor_color != NULL)
+		return (0);
+	return (1);
+}
 
 int	skip_ws(char *str)
 {
@@ -38,6 +57,11 @@ void	update_infos(t_parsing_infos *parsing_i, const char *key, char *line)
 {
 	if (!key[0])
 		return ;
+	if (!is_duplicate(parsing_i, key))
+	{
+		printf("Warning ! Identifier '%s' is declared multiple time !\n", key);
+		return ;
+	}
 	if (!ft_strncmp(key, "NO", 2))
 		parsing_i->no_path = extract_value(line, key);
 	else if (!ft_strncmp(key, "SO", 2))
