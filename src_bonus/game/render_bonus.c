@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 14:50:41 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/19 10:56:46 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/20 21:24:49 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void	dda(t_mlx *mlx, t_ray *ray)
 			ray->map_pos.y += ray->step.y;
 			ray->side = 1;
 		}
+		if (ray->map_pos.x < 0 || ray->map_pos.y < 0
+			|| (int)ft_strlen(mlx->map.map[ray->map_pos.y]) < ray->map_pos.x)
+			return ;
 		if (mlx->map.map[ray->map_pos.y][ray->map_pos.x] == '1')
 			ray->hit = 1;
 		if (is_door_hit(mlx, ray))

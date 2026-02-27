@@ -6,7 +6,7 @@
 /*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 10:29:14 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/19 16:35:42 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/27 14:59:25 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ static void	try_move(t_mlx *mlx, double dx, double dy)
 			is_door_blocked = 1;
 		i++;
 	}
-	if (mlx->map.map[(int)new_y][(int)new_x] != '1' && !is_door_blocked)
+	if ((int)ft_strlen(mlx->map.map[(int)new_y]) < (int)new_x)
+		return ;
+	if (!ft_strchr("1 \0", mlx->map.map[(int)new_y][(int)new_x])
+		&& !is_door_blocked)
 	{
 		mlx->player.pos.x = new_x;
 		mlx->player.pos.y = new_y;
@@ -70,6 +73,8 @@ static	void	update_plane(t_mlx *mlx)
 
 void	move_player(t_mlx *mlx)
 {
+	if (mlx->editor.broken > 0)
+		return;
 	if (mlx->keys[KEY_W])
 		try_move(mlx, mlx->player.rot.x * SPEED,
 			mlx->player.rot.y * SPEED);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntome <ntome@42angouleme.fr>               +#+  +:+       +#+        */
+/*   By: ntome <ntome@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 10:29:14 by ntome             #+#    #+#             */
-/*   Updated: 2026/02/07 13:17:58 by ntome            ###   ########.fr       */
+/*   Updated: 2026/02/20 21:34:10 by ntome            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ static	void	try_move(t_mlx *mlx, double dx, double dy)
 
 	new_x = mlx->player.pos.x + dx;
 	new_y = mlx->player.pos.y + dy;
-	if (mlx->map.map[(int)new_y][(int)new_x] != '1')
+	if (mlx->map.map[(int)new_y][(int)new_x] != '1'
+		&& mlx->map.map[(int)new_y][(int)new_x] != '\0'
+		&& mlx->map.map[(int)new_y][(int)new_x] != ' ')
 	{
 		mlx->player.pos.x = new_x;
 		mlx->player.pos.y = new_y;
